@@ -13,6 +13,8 @@
 - __Bluetooth module__ HC-05
   - Master/Slave
   - _does not work with iOS_
+- __Oscillator__ HC49S
+  - 8MHz and 16 MHz
 
 # software
 
