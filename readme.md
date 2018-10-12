@@ -6,6 +6,7 @@
 - __Stepper Driver__ DRV8825
   - 8.2 - 45V supply
   - interfaces with 3.3 and 5V
+- __Stepper Driver__ A4988
 - __Bluetooth module__ HM-10
   - Blutooth 4 BLE
   - supports Android and iOS
@@ -32,3 +33,13 @@
 - [$10 DIY Camera Slider](https://www.youtube.com/watch?v=fR_-R2bS9ag)
 - https://learn.adafruit.com/bluetooth-motorized-camera-slider/overview
 - [Tripod Head](https://www.aliexpress.com/item/Mini-Tripod-Ball-Head-Ballhead-1-4-Screw-Mount-Stand-360-Swivel-DSLR-DV-Camera-DSLR/32724680390.html?spm=2114.search0104.3.1.13691379tnpeQj&ws_ab_test=searchweb0_0,searchweb201602_5_10065_10068_204_318_10547_319_10059_10884_10548_10887_10696_100031_320_10084_10083_10103_452_10618_10304_10307_10820_532_10821_10302,searchweb201603_60,ppcSwitch_0&algo_expid=30498e82-a04a-432a-b954-65dff7337949-0&algo_pvid=30498e82-a04a-432a-b954-65dff7337949&priceBeautifyAB=0)
+
+
+# stepper motors
+
+- [A4988 vs DRV8825](https://reprap.org/wiki/A4988_vs_DRV8825_Chinese_Stepper_Driver_Boards) [reddit](https://www.reddit.com/r/3Dprinting/comments/5w0b0v/drv8825_vs_a4988_which_one_is_better_and_why/)
+
+
+# flashing copycat bluetooth chip
+
+- https://www.reddit.com/r/arduino/comments/43fkjf/hm10_bluetooth/
