@@ -38,6 +38,8 @@
 # stepper motors
 
 - [A4988 vs DRV8825](https://reprap.org/wiki/A4988_vs_DRV8825_Chinese_Stepper_Driver_Boards) [reddit](https://www.reddit.com/r/3Dprinting/comments/5w0b0v/drv8825_vs_a4988_which_one_is_better_and_why/)
+- [timing belt](https://de.aliexpress.com/item/1pc-5m-GT2-Timing-Belt-6mm-Width-Fiber-Reinforced-Rubber-Timing-Belt-For-CNC-3D-Printer/32790795728.html?spm=a2g0x.search0104.3.22.3d547083U1DUwA&ws_ab_test=searchweb0_0,searchweb201602_5_10065_10068_318_10547_319_10548_10696_450_10084_10083_10618_452_535_534_10304_533_10307_10820_532_10821_10302_204_10059_10884_10887_100031_320_10103_448_449,searchweb201603_60,ppcSwitch_0&algo_expid=96adedbb-4f35-4115-b37f-d53983e36a4c-3&algo_pvid=96adedbb-4f35-4115-b37f-d53983e36a4c)
+- [GT2 timing belt](https://de.aliexpress.com/wholesale?catId=146904&initiative_id=AS_20181012075453&SearchText=gt2+zahnriemen)
 
 
 # flashing copycat bluetooth chip
