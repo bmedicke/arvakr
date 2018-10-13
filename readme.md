@@ -1,20 +1,20 @@
 # hardware
 
 - __MCU__ [ATmega328p](https://www.microchip.com/wwwproducts/en/ATmega328P)
-- __Stepper Motor__ 17HS4401
+- __Stepper Motor__ [ 17HS4401 ](http://www.svaltera.ua/catalogs/knowledge-base/brands/motionking/HB_Stepper_Motor_E.pdf)
   - size: [ NEMA17 ](https://en.wikipedia.org/wiki/NEMA_stepper_motor)
-- __Stepper Driver__ DRV8825
+- __Stepper Driver__ [ DRV8826 ](http://www.ti.com/lit/ds/symlink/drv8825.pdf)
   - 8.2 - 45V supply
   - interfaces with 3.3 and 5V
-- __Stepper Driver__ A4988
-- __Bluetooth module__ HM-10
+- __Stepper Driver__ [ A4988 ](https://www.pololu.com/file/0J450/A4988.pdf)
+- __Bluetooth module__ [ HM-10 ](ftp://imall.iteadstudio.com/Modules/IM130614001_Serial_Port_BLE_Module_Master_Slave_HM-10/DS_IM130614001_Serial_Port_BLE_Module_Master_Slave_HM-10.pdf)
   - Blutooth 4 BLE
   - supports Android and iOS
   - [review by Currey](http://www.martyncurrey.com/hm-10-bluetooth-4ble-modules/)
-- __Bluetooth module__ HC-05
+- __Bluetooth module__ [ HC-05 ](ftp://imall.iteadstudio.com/Modules/IM130614001_Serial_Port_BLE_Module_Master_Slave_HM-10/DS_IM130614001_Serial_Port_BLE_Module_Master_Slave_HM-10.pdf)
   - Master/Slave
   - _does not work with iOS_
-- __Oscillator__ HC49S
+- __Oscillator__ [ HC49S ](https://www.es.co.th/Schemetic/PDF/HC49S.PDF)
   - 8MHz and 16 MHz
 
 # software
