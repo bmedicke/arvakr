@@ -2,48 +2,33 @@
    benjamin medicke */
 
 #include <avr/io.h>
-#include <avr/eeprom.h>
 
+#include "settings.h"
+#include "structs.h"
 #include "uart.h"
+#include "utils.h"
 
-struct profile {
-  uint8_t a, b;
-};
-
-void write_stuff() {
-  struct profile p;
-  p.a = 'b';
-  p.b = 'b';
-  eeprom_update_block(&p, 0, sizeof(p));
-}
-
-void read_stuff() {
-  struct profile p;
-  eeprom_read_block(&p, 0, sizeof(p));
-  uart_transmit(p.a);
-  uart_transmit(p.b);
-}
-
-void test() {
-  uart_transmit(sizeof(struct profile)+'0');
+void send_ready_note() {
+  uart_sendstring("ready\n\r");
 }
 
 int main() {
-  uart_init(BAUD);
+  uart_init(115200);
+  send_ready_note();
+  global_settings_set_defaults();
 
-  char c;
   while (1) {
-    c = uart_receive();
-    switch (c) {
-      case 'r':
-        read_stuff();
-        break;
-      case 'w':
-        write_stuff();
-        break;
-      case 't':
-        test();
-        break;
+    uint8_t command;
+    uint8_t received =  uart_receive_nonblocking(&command);
+    if (received) {
+      switch (command) {
+        case 'i':
+          send_global_settings();
+          break;
+        default:
+          break;
+      }
     }
   }
 }
+
