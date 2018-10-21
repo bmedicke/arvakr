@@ -11,15 +11,13 @@ void uart_init (uint32_t baudrate)
 
 void uart_transmit (uint8_t c)
 {
-  while (! ( UCSR0A & (1<<UDRE0))) ;
+  while (! (UCSR0A & (1<<UDRE0)));
   UDR0=c;
 }
 
 uint8_t uart_receive ()
 {
-  while (! ( UCSR0A & (1<<RXC0))) ;  // this waits for a received character!
-  // attention: the CPU stays here until a character comes into the UART.
-  //  (maybe not what you want for assignment 2 ...)
+  while (!(UCSR0A & (1<<RXC0)));
   return(UDR0);
 }
 
@@ -32,9 +30,9 @@ uint8_t uart_receive_nonblocking(uint8_t* command) {
   }
 }
 
-void uart_sendstring( char * str )      // sends all characters of a string (until the 0 at the end) to the UART
+void uart_sendstring(char* str)
 {
-  while ( * str ) {                   // loop over all characters in the string (until zero at the end)
+  while (* str) {
     uart_transmit(*str);
     str++;
   }
