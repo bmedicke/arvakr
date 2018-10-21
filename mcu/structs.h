@@ -22,7 +22,15 @@ typedef struct {
 
 /* profile */
 typedef struct {
-  uint8_t drive_mode;
+  uint32_t startup_delay;   /* in seconds */
+  uint8_t drive_mode;       /* continous, step-shoot-step, bulb */
+  uint8_t step_count;
+  uint8_t cooldown;
+  uint8_t step_delay;
+  uint8_t direction;
+  uint8_t dynamic_curve;
+  uint8_t profile_version;
+  uint8_t CRC;
 } profile;
 
 #endif /* _STRUCTS_H_ */
