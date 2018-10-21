@@ -9,6 +9,7 @@
 #include "uart.h"
 
 int main() {
+  /* setup */
   uart_init(BAUD);
 
   /* get global settings from the eeprom */
