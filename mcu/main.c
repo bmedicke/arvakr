@@ -1,11 +1,15 @@
 /* vim: foldmethod=syntax foldnestmax=1 foldenable
    benjamin medicke */
 
+#ifndef BAUD
+#define BAUD 115200
+#endif
+
 #include "settings.h"
 #include "uart.h"
 
 int main() {
-  uart_init(115200);
+  uart_init(BAUD);
   global_settings_set_defaults();
   global_settings global = global_settings_get();
 
