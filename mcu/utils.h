@@ -2,7 +2,6 @@
 #define _UTILS_H_
 
 #include <stdint.h>
-/* TODO: inline? */
 
 void uint16_to_str (uint16_t val, char* target);
 void uint32_to_str (uint32_t val, char* target);
