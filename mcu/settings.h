@@ -4,7 +4,7 @@
 #include "structs.h"
 
 void global_settings_set_defaults();
+void global_settings_send();
 global_settings global_settings_get();
-void send_global_settings();
 
 #endif /* _SETTINGS_H_ */
