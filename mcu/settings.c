@@ -83,3 +83,38 @@ uint8_t profile_set_defaults(uint8_t id) {
   return 1;
 }
 
+void profile_send(uint8_t id) {
+  profile p;
+  profile_get(&p, id);
+  char s[11];
+
+  uart_sendstring("\n\rprofile ");
+  uart_transmit(p.drive_mode+'0');
+
+  uart_sendstring("\n\r> drive_mode: ");
+  uart_transmit(p.drive_mode+'0');
+
+  uart_sendstring("\n\r> step_count: ");
+  uart_transmit(p.step_count+'0');
+
+  uart_sendstring("\n\r> cooldown: ");
+  uart_transmit(p.cooldown+'0');
+
+  uart_sendstring("\n\r> step_delay: ");
+  uart_transmit(p.step_delay+'0');
+
+  uart_sendstring("\n\r> direction: ");
+  uart_transmit(p.direction+'0');
+
+  uart_sendstring("\n\r> dynamic_curve: ");
+  uart_transmit(p.dynamic_curve+'0');
+
+  uart_sendstring("\n\r> profile_version: ");
+  uart_transmit(p.profile_version+'0');
+
+  uart_sendstring("\n\r> startup_delay: ");
+  uint32_to_str(p.startup_delay, s);
+  uart_sendstring(s);
+  uart_sendstring("\n\r");
+}
+
