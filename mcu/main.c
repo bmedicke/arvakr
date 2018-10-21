@@ -10,9 +10,11 @@
 
 int main() {
   uart_init(BAUD);
-  global_settings_set_defaults();
+
+  /* get global settings from the eeprom */
   global_settings global = global_settings_get();
 
+  /* send debug output over uart */
   if (global.uart_debug) global_settings_send();
 
   while (1) {
@@ -21,6 +23,12 @@ int main() {
 
     if (received) {
       switch (command) {
+        case 'r': /* reset global settings to default */
+          global_settings_set_defaults();
+          break;
+        case 'i': /* read global settings and send it over uart */
+          global_settings_send();
+          break;
         default:
           break;
       }
