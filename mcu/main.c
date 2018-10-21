@@ -33,6 +33,9 @@ int main() {
   if (!profile_get(&p, global.active_profile))
     uart_sendstring("invalid profile!");
 
+  if (global.uart_debug)
+    profile_send(global.active_profile);
+
   while (1) {
     handle_commands();
     switch (p.drive_mode) {
