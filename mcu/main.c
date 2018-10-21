@@ -22,6 +22,17 @@ void handle_commands() {
   }
 }
 
+void handle_mode(uint8_t mode) {
+    switch (mode) {
+      case continous:
+        break;
+      case step_shoot_step:
+        break;
+      case bulb:
+        break;
+    }
+}
+
 int main() {
   uart_init(BAUD);
 
@@ -38,14 +49,7 @@ int main() {
 
   while (1) {
     handle_commands();
-    switch (p.drive_mode) {
-      case continous:
-        break;
-      case step_shoot_step:
-        break;
-      case bulb:
-        break;
-    }
+    handle_mode(p.drive_mode);
   }
 }
 
