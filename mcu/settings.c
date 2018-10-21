@@ -32,9 +32,7 @@ void global_settings_set_defaults() {
 void global_settings_send() {
   char s[11];
   global_settings g = global_settings_get();
-  uart_sendstring("\n\rsizeof\n\r> global_settings: ");
-  uart_transmit(sizeof(global_settings)+'0');
-  uart_sendstring("\n\r\n\rglobal settings:\n\r> version: ");
+  uart_sendstring("\n\r\n\rglobal settings\n\r> version: ");
   uart_transmit(g.version+'0');
   uart_sendstring("\n\r> status_led: ");
   uart_transmit(g.status_led+'0');
