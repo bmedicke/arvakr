@@ -8,31 +8,40 @@
 #include "settings.h"
 #include "uart.h"
 
+void handle_commands() {
+  uint8_t command;
+  if (uart_receive_nonblocking(&command)) {
+    switch (command) {
+      case 'r': /* reset global settings to default */
+        global_settings_set_defaults();
+        break;
+      case 'i': /* read global settings and send it over uart */
+        global_settings_send();
+        break;
+    }
+  }
+}
+
 int main() {
-  /* setup */
   uart_init(BAUD);
 
-  /* get global settings from the eeprom */
   global_settings global = global_settings_get();
+  if (global.uart_debug)
+    global_settings_send();
 
-  /* send debug output over uart */
-  if (global.uart_debug) global_settings_send();
+  profile p;
+  if (!profile_get(&p, global.active_profile))
+    uart_sendstring("invalid profile!");
 
   while (1) {
-    uint8_t command;
-    uint8_t received = uart_receive_nonblocking(&command);
-
-    if (received) {
-      switch (command) {
-        case 'r': /* reset global settings to default */
-          global_settings_set_defaults();
-          break;
-        case 'i': /* read global settings and send it over uart */
-          global_settings_send();
-          break;
-        default:
-          break;
-      }
+    handle_commands();
+    switch (p.drive_mode) {
+      case continous:
+        break;
+      case step_shoot_step:
+        break;
+      case bulb:
+        break;
     }
   }
 }
