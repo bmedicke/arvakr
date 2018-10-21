@@ -64,3 +64,22 @@ uint8_t profile_set(profile* p, uint8_t id) {
   return 1;
 }
 
+uint8_t profile_set_defaults(uint8_t id) {
+  if (id >= NUMBER_OF_PROFILES) return 0;
+
+  profile p;
+  p.cooldown = 0;
+  p.direction = 0;
+  p.drive_mode = 0;
+  p.dynamic_curve = 0;
+  p.profile_version = 0;
+  p.startup_delay = 0;
+  p.step_count = 0;
+  p.step_delay = 0;
+  p.CRC = 0;
+
+  uint16_t destination_address = PROFILE_START_ADDRESS + (id * PROFILE_SIZE);
+  eeprom_update_block(&p, (void*) destination_address, sizeof(p));
+  return 1;
+}
+

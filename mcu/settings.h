@@ -10,5 +10,6 @@ void global_settings_send();
 
 uint8_t profile_get(profile* p, uint8_t id);
 uint8_t profile_set(profile* p, uint8_t id);
+uint8_t profile_set_defaults(uint8_t id);
 
 #endif /* _SETTINGS_H_ */
