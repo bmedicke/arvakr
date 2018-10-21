@@ -4,9 +4,7 @@
 #include <avr/io.h>
 
 #include "settings.h"
-#include "structs.h"
 #include "uart.h"
-#include "utils.h"
 
 void send_ready_note() {
   uart_sendstring("ready\n\r");
