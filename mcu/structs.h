@@ -10,6 +10,8 @@
 #define PROFILE_SIZE 50
 #define NUMBER_OF_PROFILES 20
 
+enum drive_modes { continous, step_shoot_step, bulb };
+
 /* global settings */
 typedef struct {
   uint8_t version;
