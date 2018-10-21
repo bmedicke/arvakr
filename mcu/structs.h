@@ -13,7 +13,7 @@ typedef struct {
   uint8_t autostart;
   uint8_t status_led;
   uint8_t uart_debug;
-  uint32_t autentication_token;
+  uint32_t authentication_token;
 } global_settings;
 
 /* profile */

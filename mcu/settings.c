@@ -8,7 +8,7 @@
 void global_settings_set_defaults() {
   global_settings g;
   g.version = 0;
-  g.autentication_token = -1;
+  g.authentication_token = -1;
   g.status_led = 1;
   g.autostart = 1;
   g.uart_debug = 1;
@@ -37,7 +37,7 @@ void global_settings_send() {
   uart_sendstring("\n\r> uart_debug: ");
   uart_transmit(g.uart_debug+'0');
   uart_sendstring("\n\r> authentication_token: ");
-  uint32_to_str(g.autentication_token, s);
+  uint32_to_str(g.authentication_token, s);
   uart_sendstring(s);
   uart_sendstring("\n\r");
 }
