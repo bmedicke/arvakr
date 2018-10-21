@@ -2,33 +2,26 @@
    benjamin medicke */
 
 #include <avr/io.h>
-#include <util/delay.h>
-#include <avr/interrupt.h>
 #include <avr/eeprom.h>
 
-#include "timer.h"
 #include "uart.h"
 
 struct profile {
-  uint8_t a;
+  uint8_t a, b;
 };
 
-void send_instructions() {
-  uart_sendstring("benbenben");
-}
-
 void write_stuff() {
-  char* string = "ben!ben!";
-  for (int i = 0;i < 10;i++)
-    eeprom_update_byte((uint8_t*) i, string[i]);
+  struct profile p;
+  p.a = 'b';
+  p.b = 'b';
+  eeprom_update_block(&p, 0, sizeof(p));
 }
 
 void read_stuff() {
-  uint8_t byte = 0;
-  for (int i = 0;i < 10;i++) {
-    byte = eeprom_read_byte((uint8_t*) i);
-    uart_transmit(byte);
-  }
+  struct profile p;
+  eeprom_read_block(&p, 0, sizeof(p));
+  uart_transmit(p.a);
+  uart_transmit(p.b);
 }
 
 void test() {
