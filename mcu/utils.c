@@ -2,8 +2,7 @@
 
 /* 2^16-1 =  5 digits + 1 for string terminator */
 void uint16_to_str (uint16_t val, char* target) {
-  int8_t i;
-  for (i=4; i>=0; i--) {
+  for (int i = 4; i >= 0; i--) {
     target [i] = val % 10 + '0';
     val /= 10;
   }
@@ -12,8 +11,7 @@ void uint16_to_str (uint16_t val, char* target) {
 
 /* 2^32-1 = 10 digits + 1 for string terminator*/
 void uint32_to_str (uint32_t val, char* target) {
-  int8_t i;
-  for (i=9; i>=0; i--) {
+  for (int i = 9; i >= 0; i--) {
     target [i] = val % 10 + '0';
     val /= 10;
   }
