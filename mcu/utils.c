@@ -6,7 +6,7 @@ void uint16_to_str (uint16_t val, char* target) {
     target [i] = val % 10 + '0';
     val /= 10;
   }
-  target[6] = 0;
+  target[6] = '\0';
 }
 
 void uint32_to_str (uint32_t val, char* target) {
