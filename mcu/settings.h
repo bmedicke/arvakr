@@ -3,8 +3,12 @@
 
 #include "structs.h"
 
+global_settings global_settings_get();
+void global_settings_set(global_settings* g);
 void global_settings_set_defaults();
 void global_settings_send();
-global_settings global_settings_get();
+
+uint8_t profile_get(profile* p, uint8_t id);
+uint8_t profile_set(profile* p, uint8_t id);
 
 #endif /* _SETTINGS_H_ */

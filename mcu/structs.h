@@ -4,8 +4,11 @@
 #include <stdint.h>
 
 #define GLOBAL_SETTINGS_START_ADDRESS 0
-#define GLOBAL_SETTINGS_SIZE 20
-#define PROFILE_START_ADDRESS GLOBAL_SETTINGS_SIZE + 1
+#define GLOBAL_SETTINGS_SIZE 24
+
+#define PROFILE_START_ADDRESS GLOBAL_SETTINGS_SIZE - 1
+#define PROFILE_SIZE 50
+#define NUMBER_OF_PROFILES 20
 
 /* global settings */
 typedef struct {

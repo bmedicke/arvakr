@@ -5,6 +5,18 @@
 #include "uart.h"
 #include "settings.h"
 
+global_settings global_settings_get() {
+  global_settings g;
+  eeprom_read_block(&g, GLOBAL_SETTINGS_START_ADDRESS,
+      sizeof(global_settings));
+  return g;
+}
+
+void global_settings_set(global_settings* g) {
+  eeprom_update_block(&g, GLOBAL_SETTINGS_START_ADDRESS,
+      sizeof(global_settings));
+}
+
 void global_settings_set_defaults() {
   global_settings g;
   g.version = 0;
@@ -15,13 +27,6 @@ void global_settings_set_defaults() {
   g.active_profile = 0;
   eeprom_update_block(&g, GLOBAL_SETTINGS_START_ADDRESS,
       sizeof(global_settings));
-}
-
-global_settings global_settings_get() {
-  global_settings g;
-  eeprom_read_block(&g, GLOBAL_SETTINGS_START_ADDRESS,
-      sizeof(global_settings));
-  return g;
 }
 
 void global_settings_send() {
@@ -43,5 +48,21 @@ void global_settings_send() {
   uint32_to_str(g.authentication_token, s);
   uart_sendstring(s);
   uart_sendstring("\n\r");
+}
+
+/* ATmega328 uses 16 bit to address the eeprom, so we use uint16_t */
+
+uint8_t profile_get(profile* p, uint8_t id) {
+  if (id >= NUMBER_OF_PROFILES) return 0;
+  uint16_t destination_address = PROFILE_START_ADDRESS + (id * PROFILE_SIZE);
+  eeprom_read_block(p, (void*) destination_address, sizeof(*p));
+  return 1;
+}
+
+uint8_t profile_set(profile* p, uint8_t id) {
+  if (id >= NUMBER_OF_PROFILES) return 0;
+  uint16_t destination_address = PROFILE_START_ADDRESS + (id * PROFILE_SIZE);
+  eeprom_update_block(p, (void*) destination_address, sizeof(*p));
+  return 1;
 }
 
