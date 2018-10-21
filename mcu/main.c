@@ -20,7 +20,7 @@ int main() {
 
   while (1) {
     uint8_t command;
-    uint8_t received =  uart_receive_nonblocking(&command);
+    uint8_t received = uart_receive_nonblocking(&command);
 
     if (received) {
       switch (command) {
