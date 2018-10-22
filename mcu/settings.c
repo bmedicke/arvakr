@@ -89,7 +89,7 @@ void profile_send(uint8_t id) {
   char s[11];
 
   uart_sendstring("\n\rprofile ");
-  uart_transmit(p.drive_mode+'0');
+  uart_transmit(id+'0');
 
   uart_sendstring("\n\r> drive_mode: ");
   uart_transmit(p.drive_mode+'0');
