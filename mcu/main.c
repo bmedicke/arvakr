@@ -5,6 +5,7 @@
 #define BAUD 115200
 #endif
 
+#include <avr/interrupt.h>
 #include "settings.h"
 #include "uart.h"
 
@@ -48,6 +49,8 @@ int main() {
 
   if (global.uart_debug)
     profile_send(global.active_profile);
+
+  sei();
 
   while (1) {
     handle_commands();
