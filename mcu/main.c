@@ -14,10 +14,10 @@ void handle_commands() {
   uint8_t command;
   if (uart_receive_nonblocking(&command)) {
     switch (command) {
-      case 'r': /* reset global settings to default */
+      case 'r':
         global_settings_set_defaults();
         break;
-      case 'i': /* read global settings and send it over uart */
+      case 'i':
         global_settings_send();
         break;
       default:
