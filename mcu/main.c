@@ -19,6 +19,7 @@ void handle_commands() {
         break;
       case 'i':
         global_settings_send();
+        profile_send(global_settings_get().active_profile);
         break;
       default:
         uart_transmit('?');
