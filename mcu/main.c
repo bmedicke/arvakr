@@ -1,6 +1,3 @@
-/* vim: foldmethod=syntax foldnestmax=1 foldenable
-   benjamin medicke */
-
 #ifndef BAUD
 #define BAUD 115200
 #endif
