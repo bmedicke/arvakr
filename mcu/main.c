@@ -18,6 +18,8 @@ void handle_commands() {
       case 'i': /* read global settings and send it over uart */
         global_settings_send();
         break;
+      default:
+        uart_transmit('?');
     }
   }
 }
