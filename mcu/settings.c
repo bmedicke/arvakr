@@ -32,20 +32,20 @@ void global_settings_set_defaults() {
 void global_settings_send() {
   char s[11];
   global_settings g = global_settings_get();
-  uart_sendstring("\n\r\n\rglobal settings\n\r> version: ");
+  uart_send_string("\n\r\n\rglobal settings\n\r> version: ");
   uart_transmit(g.version+'0');
-  uart_sendstring("\n\r> status_led: ");
+  uart_send_string("\n\r> status_led: ");
   uart_transmit(g.status_led+'0');
-  uart_sendstring("\n\r> autostart: ");
+  uart_send_string("\n\r> autostart: ");
   uart_transmit(g.autostart+'0');
-  uart_sendstring("\n\r> uart_debug: ");
+  uart_send_string("\n\r> uart_debug: ");
   uart_transmit(g.uart_debug+'0');
-  uart_sendstring("\n\r> active_profile: ");
+  uart_send_string("\n\r> active_profile: ");
   uart_transmit(g.active_profile+'0');
-  uart_sendstring("\n\r> authentication_token: ");
+  uart_send_string("\n\r> authentication_token: ");
   uint32_to_str(g.authentication_token, s);
-  uart_sendstring(s);
-  uart_sendstring("\n\r");
+  uart_send_string(s);
+  uart_send_string("\n\r");
 }
 
 /* ATmega328 uses 16 bit to address the eeprom, so we use uint16_t */
@@ -88,33 +88,33 @@ void profile_send(uint8_t id) {
   profile_get(&p, id);
   char s[11];
 
-  uart_sendstring("\n\rprofile ");
+  uart_send_string("\n\rprofile ");
   uart_transmit(id+'0');
 
-  uart_sendstring("\n\r> drive_mode: ");
+  uart_send_string("\n\r> drive_mode: ");
   uart_transmit(p.drive_mode+'0');
 
-  uart_sendstring("\n\r> step_count: ");
+  uart_send_string("\n\r> step_count: ");
   uart_transmit(p.step_count+'0');
 
-  uart_sendstring("\n\r> cooldown: ");
+  uart_send_string("\n\r> cooldown: ");
   uart_transmit(p.cooldown+'0');
 
-  uart_sendstring("\n\r> step_delay: ");
+  uart_send_string("\n\r> step_delay: ");
   uart_transmit(p.step_delay+'0');
 
-  uart_sendstring("\n\r> direction: ");
+  uart_send_string("\n\r> direction: ");
   uart_transmit(p.direction+'0');
 
-  uart_sendstring("\n\r> dynamic_curve: ");
+  uart_send_string("\n\r> dynamic_curve: ");
   uart_transmit(p.dynamic_curve+'0');
 
-  uart_sendstring("\n\r> profile_version: ");
+  uart_send_string("\n\r> profile_version: ");
   uart_transmit(p.profile_version+'0');
 
-  uart_sendstring("\n\r> startup_delay: ");
+  uart_send_string("\n\r> startup_delay: ");
   uint32_to_str(p.startup_delay, s);
-  uart_sendstring(s);
-  uart_sendstring("\n\r");
+  uart_send_string(s);
+  uart_send_string("\n\r");
 }
 

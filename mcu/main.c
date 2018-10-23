@@ -17,7 +17,7 @@ int main() {
 
   profile p;
   if (!profile_get(&p, global.active_profile))
-    uart_sendstring("profile id out of range!");
+    uart_send_string("profile id out of range!");
 
   if (global.uart_debug)
     profile_send(global.active_profile);
