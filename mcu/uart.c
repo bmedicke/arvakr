@@ -32,7 +32,9 @@ uint8_t uart_receive_nonblocking(uint8_t* command) {
 
 void uart_sendstring(char* str)
 {
-  while (* str) {
+  /* pointer starts out on leftmost character of our string */
+  /* while our pointer points to anything but NULL send the value */
+  while (*str) {
     uart_transmit(*str);
     str++;
   }
