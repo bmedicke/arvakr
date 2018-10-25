@@ -8,13 +8,13 @@
 global_settings global_settings_get() {
   global_settings g;
   eeprom_read_block(&g, GLOBAL_SETTINGS_START_ADDRESS,
-      sizeof(global_settings));
+                    sizeof(global_settings));
   return g;
 }
 
 void global_settings_set(global_settings* g) {
   eeprom_update_block(&g, GLOBAL_SETTINGS_START_ADDRESS,
-      sizeof(global_settings));
+                      sizeof(global_settings));
 }
 
 void global_settings_set_defaults() {
@@ -26,22 +26,22 @@ void global_settings_set_defaults() {
   g.uart_debug = 1;
   g.active_profile = 0;
   eeprom_update_block(&g, GLOBAL_SETTINGS_START_ADDRESS,
-      sizeof(global_settings));
+                      sizeof(global_settings));
 }
 
 void global_settings_send() {
   char s[11];
   global_settings g = global_settings_get();
   uart_send_string("\n\r\n\rglobal settings\n\r> version: ");
-  uart_transmit(g.version+'0');
+  uart_transmit(g.version + '0');
   uart_send_string("\n\r> status_led: ");
-  uart_transmit(g.status_led+'0');
+  uart_transmit(g.status_led + '0');
   uart_send_string("\n\r> autostart: ");
-  uart_transmit(g.autostart+'0');
+  uart_transmit(g.autostart + '0');
   uart_send_string("\n\r> uart_debug: ");
-  uart_transmit(g.uart_debug+'0');
+  uart_transmit(g.uart_debug + '0');
   uart_send_string("\n\r> active_profile: ");
-  uart_transmit(g.active_profile+'0');
+  uart_transmit(g.active_profile + '0');
   uart_send_string("\n\r> authentication_token: ");
   uint32_to_str(g.authentication_token, s);
   uart_send_string(s);
@@ -89,28 +89,28 @@ void profile_send(uint8_t id) {
   char s[11];
 
   uart_send_string("\n\rprofile ");
-  uart_transmit(id+'0');
+  uart_transmit(id + '0');
 
   uart_send_string("\n\r> drive_mode: ");
-  uart_transmit(p.drive_mode+'0');
+  uart_transmit(p.drive_mode + '0');
 
   uart_send_string("\n\r> step_count: ");
-  uart_transmit(p.step_count+'0');
+  uart_transmit(p.step_count + '0');
 
   uart_send_string("\n\r> cooldown: ");
-  uart_transmit(p.cooldown+'0');
+  uart_transmit(p.cooldown + '0');
 
   uart_send_string("\n\r> step_delay: ");
-  uart_transmit(p.step_delay+'0');
+  uart_transmit(p.step_delay + '0');
 
   uart_send_string("\n\r> direction: ");
-  uart_transmit(p.direction+'0');
+  uart_transmit(p.direction + '0');
 
   uart_send_string("\n\r> dynamic_curve: ");
-  uart_transmit(p.dynamic_curve+'0');
+  uart_transmit(p.dynamic_curve + '0');
 
   uart_send_string("\n\r> profile_version: ");
-  uart_transmit(p.profile_version+'0');
+  uart_transmit(p.profile_version + '0');
 
   uart_send_string("\n\r> startup_delay: ");
   uint32_to_str(p.startup_delay, s);

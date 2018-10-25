@@ -1,28 +1,25 @@
 #include <avr/io.h>
 
-void uart_init (uint32_t baudrate)
-{
-  uint16_t ubrr = (F_CPU / 8 / baudrate) -1;
+void uart_init(uint32_t baudrate) {
+  uint16_t ubrr = (F_CPU / 8 / baudrate) - 1;
   UBRR0H = (uint8_t) (ubrr >> 8) ;
   UBRR0L = (uint8_t) (ubrr & 0xff);
-  UCSR0A = (1<<U2X0);
-  UCSR0B = (1<<TXEN0) | (1<<RXEN0);
+  UCSR0A = (1 << U2X0);
+  UCSR0B = (1 << TXEN0) | (1 << RXEN0);
 }
 
-void uart_transmit (uint8_t c)
-{
-  while (! (UCSR0A & (1<<UDRE0)));
-  UDR0=c;
+void uart_transmit(uint8_t c) {
+  while (! (UCSR0A & (1 << UDRE0)));
+  UDR0 = c;
 }
 
-uint8_t uart_receive ()
-{
-  while (!(UCSR0A & (1<<RXC0)));
-  return(UDR0);
+uint8_t uart_receive() {
+  while (!(UCSR0A & (1 << RXC0)));
+  return (UDR0);
 }
 
 uint8_t uart_receive_nonblocking(uint8_t* command) {
-  if (UCSR0A & (1<<RXC0)) {
+  if (UCSR0A & (1 << RXC0)) {
     *command = UDR0;
     return 1;
   } else {
