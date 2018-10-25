@@ -66,7 +66,7 @@ $(TARGET).elf: $(OBJECTS)
 
 # targets that don't correspond to a file
 .PHONY: all clean size flash simavr upload-trace \
-	get-flash get-eeprom get-info dependency-graph loc
+	get-flash get-eeprom get-info dependency-graph loc format
 
 clean:
 	rm -f *.elf *.hex *.vcd *.i *.s *.o dependency-graph.pdf
@@ -99,6 +99,9 @@ get-info:
 
 dependency-graph:
 	make all -Bnd | make2graph | dot -Tpdf -o dependency-graph.pdf
+
+format:
+	astyle "*.h" "*.c" --recursive --mode=c
 
 loc:
 	cloc *.[c,h]
