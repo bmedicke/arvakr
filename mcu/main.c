@@ -1,15 +1,26 @@
-#ifndef BAUD
-  #define BAUD 115200
-#endif
-
 #include <avr/interrupt.h>
+#include <avr/sleep.h>
+
 #include "commands.h"
 #include "modes.h"
 #include "settings.h"
 #include "uart.h"
+#include "timer.h"
+
+#ifndef BAUD
+  #define BAUD 115200
+#endif
+
+static uint32_t second;
+
+ISR(TIMER1_OVF_vect) {
+  reset_timer();
+  second++;
+}
 
 int main() {
   uart_init(BAUD);
+  timer_init();
 
   global_settings global = global_settings_get();
   if (global.uart_debug)
@@ -26,7 +37,7 @@ int main() {
 
   for (;;) {
     handle_commands();
-    handle_mode(p.drive_mode);
+    handle_mode(p.drive_mode, second);
   }
 }
 
