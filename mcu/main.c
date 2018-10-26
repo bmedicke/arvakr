@@ -1,11 +1,10 @@
 #include <avr/interrupt.h>
-#include <avr/sleep.h>
 
 #include "commands.h"
 #include "modes.h"
 #include "settings.h"
-#include "uart.h"
 #include "timer.h"
+#include "uart.h"
 
 #ifndef BAUD
   #define BAUD 115200

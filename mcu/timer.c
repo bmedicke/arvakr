@@ -1,5 +1,7 @@
 #include <avr/io.h>
+
 #include "timer.h"
+
 #define TIMER1_OFFSET 0
 
 void reset_timer() {

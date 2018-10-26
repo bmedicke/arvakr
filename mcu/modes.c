@@ -1,6 +1,6 @@
 #include "modes.h"
-#include "uart.h"
 #include "settings.h"
+#include "uart.h"
 #include "utils.h"
 
 void _mode_continous(uint32_t second) {

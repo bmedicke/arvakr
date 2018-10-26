@@ -1,9 +1,9 @@
-#include <stdint.h>
 #include <avr/eeprom.h>
+#include <stdint.h>
 
-#include "utils.h"
-#include "uart.h"
 #include "settings.h"
+#include "uart.h"
+#include "utils.h"
 
 global_settings global_settings_get() {
   global_settings g;
