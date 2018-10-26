@@ -40,7 +40,6 @@ uint8_t _twi_read_status() {
 
 void external_eeprom_init(uint32_t scl) {
   TWSR = 0; /* clear status register. */
-
   TWBR = 0.5 * ((F_CPU / scl) - 16); /* calculate bit rate. */
   TWCR = (1 << TWEN); /* enable TWI. */
 }
