@@ -29,7 +29,7 @@ void _twi_write(uint8_t value) {
   while ((TWCR & (1 << TWINT)) == 0); /* block until transmission complete. */
 }
 
-void _twi_send_address(uint16_t target) {
+void _twi_send_address(uint8_t target) {
   _twi_write((uint8_t)target >> 8);   /* 8 MSB. */
   _twi_write((uint8_t)target & 0xFF); /* 8 LSB. */
 }
@@ -45,7 +45,7 @@ void external_eeprom_init(uint32_t scl) {
   TWCR = (1 << TWEN); /* enable TWI. */
 }
 
-void external_eeprom_write_byte(uint16_t target, uint8_t value) {
+void external_eeprom_write_byte(uint8_t target, uint8_t value) {
   _twi_start();
 
   _twi_write(EEPROM_ADDRESS | WRITE_MODE); /* select device and mode. */
@@ -55,7 +55,7 @@ void external_eeprom_write_byte(uint16_t target, uint8_t value) {
   _twi_stop();
 }
 
-uint8_t external_eeprom_read_byte(uint16_t target) {
+uint8_t external_eeprom_read_byte(uint8_t target) {
   uint8_t value = 0;
   _twi_start();
 
@@ -68,5 +68,14 @@ uint8_t external_eeprom_read_byte(uint16_t target) {
 
   _twi_stop();
   return value;
+}
+
+void external_eeprom_dump() {
+  for (int i =  0; i < 256; i++) {
+    if (i % 8 == 0) uart_transmit(' ');
+    if (i % 32 == 0) uart_send_string("\n\r");
+    uart_transmit(external_eeprom_read_byte(i) + '0');
+  }
+  uart_send_string("\n\r");
 }
 
