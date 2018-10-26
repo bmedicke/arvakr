@@ -13,7 +13,7 @@
 
 #define SCL 400000
 
-static uint32_t second; /* 32bit is enough to store ~136 years */
+volatile static uint32_t second; /* 32bit is enough to store ~136 years */
 
 ISR(TIMER1_OVF_vect) {
   reset_timer();
