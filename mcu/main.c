@@ -1,6 +1,7 @@
 #include <avr/interrupt.h>
 
 #include "commands.h"
+#include "eexternal_eprom.h"
 #include "modes.h"
 #include "settings.h"
 #include "timer.h"
@@ -9,6 +10,8 @@
 #ifndef BAUD
   #define BAUD 115200
 #endif
+
+#define SCL 400000
 
 static uint32_t second; /* 32bit is enough to store ~136 years */
 
@@ -19,6 +22,7 @@ ISR(TIMER1_OVF_vect) {
 
 int main() {
   uart_init(BAUD);
+  external_eeprom_init(SCL);
   timer_init();
 
   global_settings global = global_settings_get();
