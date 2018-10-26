@@ -7,6 +7,7 @@
 #define EEPROM_ADDRESS 0b10100000 /* last digit must be 0. */
 #define READ_MODE  1
 #define WRITE_MODE 0
+#define EEPROM_SIZE_IN_BYTES 256
 
 void _twi_start() {
   TWCR = (1 << TWINT) | (1 << TWSTA) | (1 << TWEN); /* start  bit. */
@@ -70,7 +71,7 @@ uint8_t external_eeprom_read_byte(uint8_t target) {
 }
 
 void external_eeprom_dump() {
-  for (int i =  0; i < 256; i++) {
+  for (int i =  0; i < EEPROM_SIZE_IN_BYTES; i++) {
     if (i % 8 == 0) uart_transmit(' ');
     if (i % 32 == 0) uart_send_string("\n\r");
     uart_transmit(external_eeprom_read_byte(i) + '0');
