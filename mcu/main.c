@@ -26,14 +26,13 @@ int main() {
   timer_init();
 
   global_settings global = global_settings_get();
-  if (global.uart_debug)
-    global_settings_send();
 
   profile p;
   if (!profile_get(&p, global.active_profile))
     uart_send_string("profile id out of range!");
 
   if (global.uart_debug) {
+    global_settings_send();
     profile_send(global.active_profile);
     external_eeprom_dump();
   }
