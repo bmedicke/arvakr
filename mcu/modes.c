@@ -6,8 +6,8 @@
 void _mode_continous(uint32_t second) {
   static uint32_t last_second = 0;
 
+  /* entered once per second: */
   if (last_second != second) {
-    /* called once per second. */
     char seconds[11];
     uint32_to_str(second, seconds);
     uart_send_string("\n\r");
@@ -20,8 +20,8 @@ void _mode_continous(uint32_t second) {
 void _mode_step_shoot_step(uint32_t second) {
   static uint32_t last_second = 0;
 
+  /* entered once per second: */
   if (last_second != second) {
-    /* once per second. */
   }
 
   last_second = second;
@@ -30,8 +30,8 @@ void _mode_step_shoot_step(uint32_t second) {
 void _mode_bulb(uint32_t second) {
   static uint32_t last_second = 0;
 
+  /* entered once per second: */
   if (last_second != second) {
-    /* once per second. */
   }
 
   last_second = second;

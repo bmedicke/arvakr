@@ -10,7 +10,7 @@
   #define BAUD 115200
 #endif
 
-static uint32_t second;
+static uint32_t second; /* 32bit is enough to store ~136 years */
 
 ISR(TIMER1_OVF_vect) {
   reset_timer();
