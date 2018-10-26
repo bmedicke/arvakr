@@ -24,7 +24,7 @@ int main() {
 
   sei();
 
-  while (1) {
+  for (;;) {
     handle_commands();
     handle_mode(p.drive_mode);
   }
