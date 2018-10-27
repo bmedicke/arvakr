@@ -35,7 +35,7 @@ CFLAGS += -Wall -Werror
 CFLAGS += -g3
 #  -Os      optimize for size
 #  -mmcu    set Model MicroControlller Unit
-#  -g3      add debug symbols
+#  -g3      add debug symbols, no impact on .hex size
 #  -Wall    enable all errors
 #  -Werror  warnings are errors
 
