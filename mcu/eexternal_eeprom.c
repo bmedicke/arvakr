@@ -1,4 +1,5 @@
 #include <avr/io.h>
+#include <util/delay.h>
 #include <util/twi.h> /* two wire interface */
 
 #include "eexternal_eprom.h"
@@ -8,6 +9,7 @@
 #define READ_MODE  1
 #define WRITE_MODE 0
 #define EEPROM_SIZE_IN_BYTES 256
+#define WRITE_CYCLE_TIME_IN_MS 5
 
 void _twi_start() {
   TWCR = (1 << TWINT) | (1 << TWSTA) | (1 << TWEN); /* start  bit. */
@@ -53,6 +55,8 @@ void external_eeprom_write_byte(uint8_t target, uint8_t value) {
   _twi_write(value);
 
   _twi_stop();
+
+  _delay_ms(WRITE_CYCLE_TIME_IN_MS);
 }
 
 uint8_t external_eeprom_read_byte(uint8_t target) {
