@@ -6,7 +6,9 @@ MCU        = atmega328p
 PORT       = /dev/cu.usbmodem*
 PROGRAMMER = arduino
 
-LIBDIR   = vendor
+LIBDIR   = vendor/
+BINDIR = build/
+
 
 # simavr can be removed as soon as the homebrew formula is fixed.
 INCLUDES = -I. -I$(LIBDIR) -isystem"/usr/local/include/simavr"
@@ -46,22 +48,22 @@ LDFLAGS = -Os -mmcu=$(MCU)
 CXXFLAGS =
 
 # add all directories with code to the wildcard:
-SOURCES = $(wildcard *.c $(LIBDIR)/*.c)
-OBJECTS = $(SOURCES:.c=.o)
+SOURCES = $(wildcard *.c $(LIBDIR)*.c)
+OBJECTS = $(addprefix $(BINDIR), $(SOURCES:.c=.o))
 HEADERS = $(SOURCES:.c=.h)
 
-all: $(TARGET).hex
+all: $(BINDIR)$(TARGET).hex
 
-%.o: %.c Makefile
-	$(CC) $(CFLAGS) $(CPPFLAGS) $< -c -o $@ --save-temps
+$(BINDIR)%.o: %.c Makefile
+	$(CC) $(CFLAGS) $(CPPFLAGS) $< -c -o $@ # --save-temps
 
-%.o: %.c $(HEADERS) Makefile
-	$(CC) $(CFLAGS) $(CPPFLAGS) $< -c -o $@ --save-temps
+$(BINDIR)%.o: %.c $(HEADERS) Makefile
+	$(CC) $(CFLAGS) $(CPPFLAGS) $< -c -o $@ # --save-temps
 
-$(TARGET).elf: $(OBJECTS)
+$(BINDIR)$(TARGET).elf: $(OBJECTS)
 	$(CC) $(CFLAGS) $^ -o $@
 
-%.hex: %.elf
+$(BINDIR)%.hex: $(BINDIR)%.elf
 	$(OBJCOPY) -j .text -j .data -O ihex $< $@
 
 # targets that don't correspond to a file
@@ -69,17 +71,17 @@ $(TARGET).elf: $(OBJECTS)
 	get-flash get-eeprom get-info dependency-graph loc format test
 
 clean:
-	rm -f *.elf *.hex *.vcd *.i *.s *.o dependency-graph.pdf
+	rm -f *.elf *.hex *.vcd *.i *.s *.o dependency-graph.pdf build/*
 
-size: $(TARGET).elf
-	$(AVRSIZE) -C --mcu=$(MCU) $(TARGET).elf
+size: $(BINDIR)$(TARGET).elf
+	$(AVRSIZE) -C --mcu=$(MCU) $(BINDIR)$(TARGET).elf
 
-flash: $(TARGET).hex
+flash: $(BINDIR)$(TARGET).hex
 	$(AVRDUDE) -P $(PORT) -b $(BAUD) -p $(MCU) -c $(PROGRAMMER) \
-		-U flash:w:$(TARGET).hex
+		-U flash:w:$(BINDIR)$(TARGET).hex
 
-simavr: $(TARGET).elf
-	$(SIMAVR) $(TARGET).elf
+simavr: $(BINDIR)$(TARGET).elf
+	$(SIMAVR) $(BINDIR)$(TARGET).elf
 
 # upload Value Change Dumps to debian VM for GTKWave.
 upload-trace:
