@@ -1,5 +1,6 @@
 #include <avr/interrupt.h>
 
+#include "bluetooth.h"
 #include "commands.h"
 #include "eexternal_eprom.h"
 #include "modes.h"
