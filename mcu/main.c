@@ -6,6 +6,7 @@
 #include "settings.h"
 #include "timer.h"
 #include "uart.h"
+#include "utils.h"
 
 #ifndef BAUD
   #define BAUD 115200
@@ -13,7 +14,7 @@
 
 #define I2C_SCL 400000
 
-volatile static uint32_t second; /* 32bit is enough to store ~136 years */
+volatile global_variable uint32_t second; /* 32bit is enough to store ~136 years */
 
 ISR(TIMER1_OVF_vect) {
   reset_timer();
