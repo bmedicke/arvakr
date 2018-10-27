@@ -66,7 +66,7 @@ $(TARGET).elf: $(OBJECTS)
 
 # targets that don't correspond to a file
 .PHONY: all clean size flash simavr upload-trace \
-	get-flash get-eeprom get-info dependency-graph loc format
+	get-flash get-eeprom get-info dependency-graph loc format test
 
 clean:
 	rm -f *.elf *.hex *.vcd *.i *.s *.o dependency-graph.pdf
@@ -105,3 +105,6 @@ format:
 
 loc:
 	cloc *.[c,h]
+
+test:
+	$(MAKE) flash && minicom
