@@ -30,7 +30,7 @@ CPPFLAGS = -D F_CPU=$(F_CPU) -D BAUD=$(BAUD) -D MCU=\"$(MCU)\" $(INCLUDES)
 #  -D       define macro
 
 # c compiler flags:
-CFLAGS = -Os -mmcu=$(MCU)
+CFLAGS = -O3 -mmcu=$(MCU)
 CFLAGS += -Wall -Werror
 CFLAGS += -g3
 #  -Os      optimize for size
