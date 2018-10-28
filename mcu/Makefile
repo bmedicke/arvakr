@@ -5,12 +5,21 @@ BAUD       = 115200
 F_CPU      = 16000000UL
 I2C_SCL    = 400000UL
 MCU        = atmega328p
-PORT       = /dev/cu.usbmodem*
 PROGRAMMER = arduino
 
-LIBDIR   = vendor/
+# leave empty to try automatic detection.
+PORT = 
+
+LIBDIR = vendor/
 BINDIR = build/
 
+ifeq ("$(PORT)","")
+	ifneq ("$(wildcard /dev/cu.usbmodem*)","")
+		PORT = /dev/cu.usbmodem*
+	else
+		PORT = /dev/ttyACM0
+	endif
+endif
 
 # simavr can be removed as soon as the homebrew formula is fixed.
 INCLUDES = -I. -I$(LIBDIR) -isystem"/usr/local/include/simavr"
@@ -112,4 +121,4 @@ loc:
 	cloc *.[c,h]
 
 test:
-	$(MAKE) flash && minicom
+	$(MAKE) flash && minicom -D $(PORT)
