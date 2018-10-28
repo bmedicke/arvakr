@@ -103,7 +103,7 @@ dependency-graph:
 	make all -Bnd | make2graph | dot -Tpdf -o dependency-graph.pdf
 
 format:
-	astyle "*.h" "*.c" --recursive --mode=c --lineend=linux
+	astyle --recursive "*.h" "*.c" --project=astyle.rc
 
 loc:
 	cloc *.[c,h]
