@@ -1,0 +1,15 @@
+align-pointer=type
+align-reference=type
+convert-tabs
+indent-preproc-block
+indent-switches
+indent=spaces=2
+lineend=linux
+max-code-length=79
+mode=c
+pad-header
+pad-oper
+preserve-date
+quiet
+style=java
+suffix=none
