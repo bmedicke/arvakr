@@ -1,4 +1,5 @@
 # benjamin medicke
+# github.com/bmedicke
 
 BAUD       = 115200
 F_CPU      = 16000000UL
