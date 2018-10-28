@@ -3,6 +3,7 @@
 
 BAUD       = 115200
 F_CPU      = 16000000UL
+I2C_SCL    = 400000UL
 MCU        = atmega328p
 PORT       = /dev/cu.usbmodem*
 PROGRAMMER = arduino
@@ -29,7 +30,8 @@ SIMAVR  = simavr
 TARGET = $(lastword $(subst /, ,$(CURDIR)))
 
 # preprocessor flags:
-CPPFLAGS = -D F_CPU=$(F_CPU) -D BAUD=$(BAUD) -D MCU=\"$(MCU)\" $(INCLUDES)
+CPPFLAGS = -D F_CPU=$(F_CPU) -D I2C_SCL=$(I2C_SCL) -D BAUD=$(BAUD) \
+					 -D MCU=\"$(MCU)\" $(INCLUDES)
 #  -D       define macro
 
 # c compiler flags:

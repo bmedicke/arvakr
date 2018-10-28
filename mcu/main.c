@@ -12,7 +12,9 @@
   #define BAUD 115200
 #endif
 
-#define I2C_SCL 400000
+#ifndef I2C_SCL
+  #define I2C_SCL 400000
+#endif
 
 volatile global_variable uint32_t second; /* 32bit is enough to store ~136 years */
 
