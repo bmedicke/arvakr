@@ -14,7 +14,8 @@
 
 #define I2C_SCL 400000
 
-volatile global_variable uint32_t second; /* 32bit is enough to store ~136 years */
+volatile global_variable uint32_t
+second; /* 32bit is enough to store ~136 years */
 
 ISR(TIMER1_OVF_vect) {
   reset_timer();
