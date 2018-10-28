@@ -74,6 +74,12 @@ uint8_t external_eeprom_read_byte(uint8_t target) {
   return value;
 }
 
+void external_eeprom_update_byte(uint8_t target, uint8_t value) {
+  uint8_t byte = external_eeprom_read_byte(target);
+  if (value != byte)
+    external_eeprom_write_byte(target, value);
+}
+
 void external_eeprom_dump() {
   for (int i =  0; i < EEPROM_SIZE_IN_BYTES; i++) {
     if (i % 8 == 0) uart_transmit(' ');
