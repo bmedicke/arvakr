@@ -11,5 +11,5 @@ pad-header
 pad-oper
 preserve-date
 quiet
-style=java
+style=google
 suffix=none
