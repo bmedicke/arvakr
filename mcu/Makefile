@@ -46,7 +46,7 @@ CPPFLAGS = -D F_CPU=$(F_CPU) -D I2C_SCL=$(I2C_SCL) -D BAUD=$(BAUD) \
 # c compiler flags:
 CFLAGS = -O3 -mmcu=$(MCU)
 CFLAGS += -Wall -Werror
-CFLAGS += -g3
+CFLAGS += -g3 -std=c99
 #  -Os      optimize for size
 #  -mmcu    set Model MicroControlller Unit
 #  -g3      add debug symbols, no impact on .hex size
