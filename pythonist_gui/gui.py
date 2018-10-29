@@ -15,37 +15,38 @@ class global_settings:
 
 class profile_settings:
     def __init__(self):
-        self.name = 'step-shoot-step'  # default profile
-        self.debug_mode = 1
+        self.name = 'step-shoot-step'  # default profile.
+        self.debug_mode = 0
         self.cmd = 'S'
 
 
-g = global_settings()
-p = profile_settings()
+global_settings = global_settings()
+profile = profile_settings()
 
 
 def load_profile(sender):
-    global p
+    global profile
     if sender.title == 'bulb':
-        p.name = 'bulb'
-        p.cmd = 'B'
+        profile.name = 'bulb'
+        profile.cmd = 'B'
 
     elif sender.title == 'continuous':
-        p.name = 'continuous'
-        p.cmd = 'C'
+        profile.name = 'continuous'
+        profile.cmd = 'C'
 
     elif sender.title == 'step-shoot-step':
-        p = profile_settings()
+        profile = profile_settings()
 
     else:
-        p = profile_settings()
+        profile = profile_settings()
 
-    hud_alert('loaded ' + p.name)
+    hud_alert('selected ' + profile.name)
 
 
-class MyCentralManagerDelegate(object):
+class BLEDeviceManager(object):
     def __init__(self):
         self.peripheral = None
+        self.characteristic = None
 
     def did_discover_peripheral(self, p):
         if p.name == 'MLT-BT05' and not self.peripheral:
@@ -63,20 +64,25 @@ class MyCentralManagerDelegate(object):
     def did_discover_characteristics(self, s, error):
         for c in s.characteristics:
             if c.uuid == 'FFE1':
-                self.peripheral.write_characteristic_value(c, p.cmd, True)
-                hud_alert('uploaded ' + p.name)
+                self.characteristic = c
 
     def did_write_value(self, c, error):
+        hud_alert('uploaded ' + profile.name)
+
+    def upload_profile(self, sender):
+        pass
+        c = self.characteristic
+        self.peripheral.write_characteristic_value(c, profile.cmd, True)
+
+    def close(self):
         cb.reset()
 
-    def did_update_value(self, s, error):
-        hud_alert('did_update_value')
 
-
-def upload(sender):
-    cb.set_central_delegate(MyCentralManagerDelegate())
-    cb.scan_for_peripherals()
-
+mcmd = BLEDeviceManager()
+cb.set_central_delegate(mcmd)
+cb.scan_for_peripherals()
 
 v = ui.load_view()
 v.present('gui')
+v.wait_modal()  # block 'till view closes.
+cb.reset()  # reset the ble connection.
