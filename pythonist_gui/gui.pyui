@@ -1,0 +1,149 @@
+[
+  {
+    "nodes" : [
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{64, 165}, {186, 35}}",
+        "class" : "Button",
+        "attributes" : {
+          "uuid" : "AC6021C4-6D19-416F-84A9-79404F1A2AC4",
+          "font_size" : 15,
+          "corner_radius" : 5,
+          "frame" : "{{472, 368}, {80, 32}}",
+          "border_color" : "RGBA(0.761792,0.761792,0.761792,1.000000)",
+          "border_width" : 1,
+          "tint_color" : "RGBA(0.000000,-0.000000,-0.000000,1.000000)",
+          "title" : "bulb",
+          "action" : "load_profile",
+          "font_bold" : false,
+          "class" : "Button",
+          "name" : "",
+          "flex" : ""
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{64, 79}, {186, 35}}",
+        "class" : "Button",
+        "attributes" : {
+          "uuid" : "AC6021C4-6D19-416F-84A9-79404F1A2AC4",
+          "flex" : "",
+          "corner_radius" : 5,
+          "background_color" : "RGBA(1.000000,1.033333,1.033333,1.000000)",
+          "frame" : "{{472, 368}, {80, 32}}",
+          "border_color" : "RGBA(0.761792,0.761792,0.761792,1.000000)",
+          "border_width" : 1,
+          "tint_color" : "RGBA(0.000000,-0.000000,-0.000000,1.000000)",
+          "title" : "step-shoot-step",
+          "action" : "load_profile",
+          "font_bold" : false,
+          "class" : "Button",
+          "name" : "",
+          "font_size" : 15
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{64, 122}, {186, 35}}",
+        "class" : "Button",
+        "attributes" : {
+          "uuid" : "AC6021C4-6D19-416F-84A9-79404F1A2AC4",
+          "flex" : "",
+          "corner_radius" : 5,
+          "frame" : "{{472, 368}, {80, 32}}",
+          "border_color" : "RGBA(0.761792,0.761792,0.761792,1.000000)",
+          "border_width" : 1,
+          "tint_color" : "RGBA(0.000000,-0.000000,-0.000000,1.000000)",
+          "title" : "continuous",
+          "action" : "load_profile",
+          "font_bold" : false,
+          "class" : "Button",
+          "name" : "",
+          "font_size" : 15
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{64, 39}, {186, 32}}",
+        "class" : "Label",
+        "attributes" : {
+          "name" : "label1",
+          "frame" : "{{437, 368}, {150, 32}}",
+          "uuid" : "BB009509-4075-4C90-A193-C8A77A24C91F",
+          "class" : "Label",
+          "alignment" : "left",
+          "text" : "default profiles",
+          "font_size" : 18,
+          "font_name" : "<System>"
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{258, 39}, {599, 544}}",
+        "class" : "TextView",
+        "attributes" : {
+          "flex" : "WH",
+          "name" : "profile_view",
+          "editable" : true,
+          "frame" : "{{412, 284}, {200, 200}}",
+          "spellchecking_type" : "default",
+          "class" : "TextView",
+          "uuid" : "C8760445-71C6-4237-AB48-D69B1C3D7852",
+          "alignment" : "left",
+          "autocorrection_type" : "default",
+          "font_size" : 17,
+          "font_name" : "<System>"
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{872, 79}, {110, 31}}",
+        "class" : "Button",
+        "attributes" : {
+          "uuid" : "AC6021C4-6D19-416F-84A9-79404F1A2AC4",
+          "font_size" : 15,
+          "corner_radius" : 5,
+          "frame" : "{{472, 368}, {80, 32}}",
+          "border_color" : "RGBA(0.761792,0.761792,0.761792,1.000000)",
+          "border_width" : 1,
+          "tint_color" : "RGBA(0.000000,-0.000000,-0.000000,1.000000)",
+          "title" : "upload profile",
+          "action" : "mcmd.upload_profile",
+          "font_bold" : false,
+          "class" : "Button",
+          "name" : "",
+          "flex" : ""
+        },
+        "selected" : true
+      }
+    ],
+    "frame" : "{{0, 0}, {1024, 768}}",
+    "class" : "View",
+    "attributes" : {
+      "border_color" : "RGBA(0.000000,0.000000,0.000000,1.000000)",
+      "enabled" : true,
+      "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)",
+      "tint_color" : "RGBA(0.000000,0.478000,1.000000,1.000000)",
+      "name" : "",
+      "flex" : ""
+    },
+    "selected" : false
+  }
+]
