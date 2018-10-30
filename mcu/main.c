@@ -8,10 +8,7 @@
 #include "timer.h"
 #include "uart.h"
 
-#ifndef BAUD
-  #define BAUD 115200
-#endif
-
+#define UART_BAUD 9600
 #define I2C_SCL 400000
 
 volatile static uint32_t second; /* 32bit is enough to store ~136 years */
@@ -22,7 +19,7 @@ ISR(TIMER1_OVF_vect) {
 }
 
 int main() {
-  uart_init(BAUD);
+  uart_init(UART_BAUD);
   external_eeprom_init(I2C_SCL);
   timer_init();
 
