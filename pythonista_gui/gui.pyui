@@ -34,7 +34,6 @@
           "uuid" : "AC6021C4-6D19-416F-84A9-79404F1A2AC4",
           "flex" : "R",
           "corner_radius" : 5,
-          "background_color" : "RGBA(1.000000,1.033333,1.033333,1.000000)",
           "frame" : "{{472, 368}, {80, 32}}",
           "border_color" : "RGBA(0.761792,0.761792,0.761792,1.000000)",
           "border_width" : 1,
@@ -196,7 +195,7 @@
           "border_color" : "RGBA(0.761792,0.761792,0.761792,1.000000)",
           "border_width" : 1,
           "tint_color" : "RGBA(0.000000,-0.000000,-0.000000,1.000000)",
-          "title" : "clear",
+          "title" : "clear console",
           "action" : "mcmd.clear_textview",
           "font_bold" : false,
           "class" : "Button",
@@ -250,8 +249,8 @@
         "frame" : "{{769, 254}, {72, 31}}",
         "class" : "Label",
         "attributes" : {
-          "name" : "label2",
           "flex" : "L",
+          "name" : "label2",
           "frame" : "{{437, 368}, {150, 32}}",
           "uuid" : "734613EB-23C9-4C66-BF87-46A61E5474F4",
           "class" : "Label",
@@ -266,11 +265,11 @@
     "frame" : "{{0, 0}, {1024, 768}}",
     "class" : "View",
     "attributes" : {
-      "name" : "Alsvidr - Allgeschwind",
-      "enabled" : true,
-      "tint_color" : "RGBA(0.000000,0.478000,1.000000,1.000000)",
       "border_color" : "RGBA(0.000000,0.000000,0.000000,1.000000)",
+      "enabled" : true,
       "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)",
+      "tint_color" : "RGBA(0.000000,0.478000,1.000000,1.000000)",
+      "name" : "Alsvidr - Allgeschwind",
       "flex" : ""
     },
     "selected" : false
