@@ -4,7 +4,10 @@
 import ui
 import cb
 import time
+import notification
 from console import hud_alert
+
+view = None  # keep track of our view.
 
 
 class global_settings:
@@ -27,6 +30,7 @@ class BLEDeviceManager(object):
         self.characteristic = None
         self.global_settings = global_settings()
         self.profile = profile_settings()
+        self.autoscroll_enable = 1
 
     def did_discover_peripheral(self, p):
         if p.name == 'MLT-BT05' and not self.peripheral:
@@ -45,20 +49,40 @@ class BLEDeviceManager(object):
         for c in s.characteristics:
             if c.uuid == 'FFE1':
                 self.characteristic = c
+                self.peripheral.set_notify_value(c, True)
 
     def did_write_value(self, c, error):
         pass
+
+    def did_update_value(self, c, error):
+        if c.uuid == 'FFE1':
+            view['textview'].text += c.value.decode().replace('\r', '')
+            if self.autoscroll_enable:
+                view['textview'].content_offset = (
+                    0,
+                    view['textview'].content_size[1] - view['textview'].height,
+                )
 
     def upload_profile(self, sender):
         c = self.characteristic
         self.peripheral.write_characteristic_value(c, self.profile.cmd, True)
 
+    def clear_textview(self, sender):
+        view['textview'].text = ''
+
+    def set_autoscroll(self, sender):
+        self.autoscroll_enable = sender.value
+
     def test(self, sender):
-        c = self.characteristic
-        self.peripheral.write_characteristic_value(c, 'i', True)
+        pass
 
     def get_size(self, sender):
         hud_alert(str(ui.get_window_size()))
+
+    def new_command(self, sender):
+        c = self.characteristic
+        self.peripheral.write_characteristic_value(c, sender.text, True)
+        sender.text = ''
 
     def load_profile(self, sender):
         if sender.title == 'bulb':
@@ -89,19 +113,20 @@ width = min(ui.get_window_size())
 
 # full screen
 if width >= 768:
-    v = ui.load_view('gui')
-    v.present()
+    view = ui.load_view('gui')
+    view.present()
+    view['textview'].editable = False
 
 # split screen and slide out menu:
 elif width == 320 or width == 694 or width == 507:
     v = ui.load_view('gui_tiny')
-    v.present()
+    view.present()
 
 # fallback
 else:
     mcmd.get_size(None)
     v = ui.load_view('gui_tiny')
-    v.present()
+    view.present()
 
-v.wait_modal()  # block 'till view closes.
+view.wait_modal()  # block 'till view closes.
 cb.reset()  # reset the ble connection.
