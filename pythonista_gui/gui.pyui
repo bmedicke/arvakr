@@ -238,10 +238,10 @@
           "frame" : "{{487, 369}, {51, 31}}",
           "class" : "Switch",
           "uuid" : "351388F3-C2DB-43DA-B938-6934E31B302D",
-          "value" : true,
+          "value" : false,
           "name" : "switch1"
         },
-        "selected" : false
+        "selected" : true
       },
       {
         "nodes" : [
