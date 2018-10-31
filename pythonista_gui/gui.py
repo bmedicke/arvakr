@@ -119,13 +119,13 @@ if width >= 768:
 
 # split screen and slide out menu:
 elif width == 320 or width == 694 or width == 507:
-    v = ui.load_view('gui_tiny')
+    view = ui.load_view('gui_tiny')
     view.present()
 
 # fallback
 else:
     mcmd.get_size(None)
-    v = ui.load_view('gui_tiny')
+    view = ui.load_view('gui_tiny')
     view.present()
 
 view.wait_modal()  # block 'till view closes.
