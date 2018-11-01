@@ -3,7 +3,6 @@
 
 BAUD       = 115200
 F_CPU      = 16000000UL
-I2C_SCL    = 400000UL
 MCU        = atmega328p
 PROGRAMMER = arduino
 
@@ -39,7 +38,7 @@ SIMAVR  = simavr
 TARGET = $(lastword $(subst /, ,$(CURDIR)))
 
 # preprocessor flags:
-CPPFLAGS = -D F_CPU=$(F_CPU) -D I2C_SCL=$(I2C_SCL) -D BAUD=$(BAUD) \
+CPPFLAGS = -D F_CPU=$(F_CPU) -D BAUD=$(BAUD) \
 					 -D MCU=\"$(MCU)\" $(INCLUDES)
 #  -D       define macro
 
@@ -121,4 +120,4 @@ loc:
 	cloc *.[c,h]
 
 test:
-	$(MAKE) flash && minicom -D $(PORT)
+	$(MAKE) flash && minicom -D $(PORT) -b 9600

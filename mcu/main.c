@@ -3,18 +3,14 @@
 #include "commands.h"
 #include "eexternal_eprom.h"
 #include "modes.h"
+#include "programming_mode.h"
 #include "settings.h"
 #include "timer.h"
 #include "uart.h"
 #include "utils.h"
 
-#ifndef BAUD
-  #define BAUD 115200
-#endif
-
-#ifndef I2C_SCL
-  #define I2C_SCL 400000
-#endif
+#define UART_BAUD 9600
+#define I2C_SCL 400000
 
 volatile global_variable uint32_t
 second; /* 32bit is enough to store ~136 years */
@@ -25,23 +21,28 @@ ISR(TIMER1_OVF_vect) {
 }
 
 int main() {
-  uart_init(BAUD);
+  uart_init(UART_BAUD);
   external_eeprom_init(I2C_SCL);
   timer_init();
+  sei();
 
   global_settings global = global_settings_get();
 
   profile p;
   if (!profile_get(&p, global.active_profile))
-    uart_send_string("profile id out of range!");
+    error_string("profile id out of range!");
 
   if (global.uart_debug) {
     global_settings_send();
     profile_send(global.active_profile);
-    external_eeprom_dump();
+    // TODO: check if eeprom online!
+    /* external_eeprom_dump(); */
   }
 
-  sei();
+  debug_string("\n\r> opened programming mode window.");
+  while (programming_mode_window(second));
+  debug_string("\n\r> closed programming mode window.");
+  /* TODO: reread settings, if we entered programming mode! */
 
   for (;;) {
     handle_commands();
