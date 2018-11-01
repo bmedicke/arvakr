@@ -34,12 +34,14 @@ int main() {
   if (global.uart_debug) {
     global_settings_send();
     profile_send(global.active_profile);
-    external_eeprom_dump();
+    // TODO: check if eeprom online!
+    /* external_eeprom_dump(); */
   }
 
   debug_string("\n\r> opened programming mode window.");
   while (programming_mode_window(second));
   debug_string("\n\r> closed programming mode window.");
+  /* TODO: reread settings, if we entered programming mode! */
 
   for (;;) {
     handle_commands();
