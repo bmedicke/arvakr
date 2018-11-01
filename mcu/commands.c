@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <avr/io.h>
 
 #include "settings.h"
 #include "uart.h"
@@ -7,6 +8,10 @@ void handle_commands() {
   uint8_t command;
   if (uart_receive_nonblocking(&command)) {
     switch (command) {
+      case 'l':
+        DDRB |= (1 << PB5);
+        PORTB ^= (1 << PB5);
+        break;
       case 'r':
         global_settings_set_defaults();
         break;
