@@ -1,0 +1,258 @@
+[
+  {
+    "nodes" : [
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{189, 6}, {125, 35}}",
+        "class" : "Button",
+        "attributes" : {
+          "uuid" : "AC6021C4-6D19-416F-84A9-79404F1A2AC4",
+          "flex" : "",
+          "corner_radius" : 5,
+          "frame" : "{{472, 368}, {80, 32}}",
+          "border_color" : "RGBA(0.761792,0.761792,0.761792,1.000000)",
+          "border_width" : 1,
+          "tint_color" : "RGBA(0.000000,-0.000000,-0.000000,1.000000)",
+          "title" : "upload profile",
+          "action" : "mcmd.upload_profile",
+          "font_bold" : false,
+          "class" : "Button",
+          "name" : "",
+          "font_size" : 15
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{6, 379}, {125, 35}}",
+        "class" : "Button",
+        "attributes" : {
+          "uuid" : "AC6021C4-6D19-416F-84A9-79404F1A2AC4",
+          "font_size" : 15,
+          "corner_radius" : 5,
+          "frame" : "{{472, 368}, {80, 32}}",
+          "border_color" : "RGBA(0.761792,0.761792,0.761792,1.000000)",
+          "border_width" : 1,
+          "tint_color" : "RGBA(0.000000,-0.000000,-0.000000,1.000000)",
+          "title" : "test",
+          "action" : "mcmd.test",
+          "font_bold" : false,
+          "class" : "Button",
+          "name" : "",
+          "flex" : ""
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{6, 49}, {125, 35}}",
+        "class" : "Button",
+        "attributes" : {
+          "uuid" : "AC6021C4-6D19-416F-84A9-79404F1A2AC4",
+          "font_size" : 15,
+          "corner_radius" : 5,
+          "frame" : "{{472, 368}, {80, 32}}",
+          "border_color" : "RGBA(0.761792,0.761792,0.761792,1.000000)",
+          "border_width" : 1,
+          "tint_color" : "RGBA(0.000000,-0.000000,-0.000000,1.000000)",
+          "title" : "continuous",
+          "action" : "mcmd.load_profile",
+          "font_bold" : false,
+          "class" : "Button",
+          "name" : "",
+          "flex" : ""
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{6, 6}, {125, 35}}",
+        "class" : "Button",
+        "attributes" : {
+          "uuid" : "AC6021C4-6D19-416F-84A9-79404F1A2AC4",
+          "font_size" : 15,
+          "corner_radius" : 5,
+          "frame" : "{{472, 368}, {80, 32}}",
+          "border_color" : "RGBA(0.761792,0.761792,0.761792,1.000000)",
+          "border_width" : 1,
+          "tint_color" : "RGBA(0.000000,-0.000000,-0.000000,1.000000)",
+          "title" : "step-shoot-step",
+          "action" : "mcmd.load_profile",
+          "font_bold" : false,
+          "class" : "Button",
+          "name" : "",
+          "flex" : ""
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{6, 92}, {125, 35}}",
+        "class" : "Button",
+        "attributes" : {
+          "uuid" : "AC6021C4-6D19-416F-84A9-79404F1A2AC4",
+          "flex" : "",
+          "corner_radius" : 5,
+          "frame" : "{{472, 368}, {80, 32}}",
+          "border_color" : "RGBA(0.761792,0.761792,0.761792,1.000000)",
+          "border_width" : 1,
+          "tint_color" : "RGBA(0.000000,-0.000000,-0.000000,1.000000)",
+          "title" : "bulb",
+          "action" : "mcmd.load_profile",
+          "font_bold" : false,
+          "class" : "Button",
+          "name" : "",
+          "font_size" : 15
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{189, 92}, {125, 35}}",
+        "class" : "Button",
+        "attributes" : {
+          "uuid" : "AC6021C4-6D19-416F-84A9-79404F1A2AC4",
+          "flex" : "",
+          "corner_radius" : 5,
+          "frame" : "{{472, 368}, {80, 32}}",
+          "border_color" : "RGBA(0.761792,0.761792,0.761792,1.000000)",
+          "border_width" : 1,
+          "tint_color" : "RGBA(0.000000,-0.000000,-0.000000,1.000000)",
+          "title" : "window size",
+          "action" : "mcmd.get_size",
+          "font_bold" : false,
+          "class" : "Button",
+          "name" : "",
+          "font_size" : 15
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{6, 175}, {308, 200}}",
+        "class" : "TextView",
+        "attributes" : {
+          "uuid" : "C8760445-71C6-4237-AB48-D69B1C3D7852",
+          "flex" : "WB",
+          "corner_radius" : 2,
+          "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)",
+          "frame" : "{{412, 284}, {200, 200}}",
+          "editable" : true,
+          "border_width" : 1,
+          "alignment" : "left",
+          "autocorrection_type" : "default",
+          "font_name" : "<System>",
+          "spellchecking_type" : "default",
+          "class" : "TextView",
+          "name" : "textview",
+          "font_size" : 17
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{6, 135}, {308, 32}}",
+        "class" : "TextField",
+        "attributes" : {
+          "action" : "mcmd.new_command",
+          "flex" : "WRB",
+          "font_name" : "<System>",
+          "frame" : "{{412, 368}, {200, 32}}",
+          "spellchecking_type" : "no",
+          "class" : "TextField",
+          "uuid" : "89A929E1-B66F-4C76-9E80-15D1BAE8AC9B",
+          "alignment" : "left",
+          "autocorrection_type" : "no",
+          "font_size" : 14,
+          "name" : "textfield"
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{263, 383}, {51, 31}}",
+        "class" : "Switch",
+        "attributes" : {
+          "action" : "mcmd.set_autoscroll",
+          "flex" : "L",
+          "frame" : "{{487, 369}, {51, 31}}",
+          "class" : "Switch",
+          "uuid" : "351388F3-C2DB-43DA-B938-6934E31B302D",
+          "value" : false,
+          "name" : "switch1"
+        },
+        "selected" : true
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{183, 383}, {72, 31}}",
+        "class" : "Label",
+        "attributes" : {
+          "flex" : "L",
+          "font_name" : "<System>",
+          "frame" : "{{437, 368}, {150, 32}}",
+          "uuid" : "734613EB-23C9-4C66-BF87-46A61E5474F4",
+          "class" : "Label",
+          "alignment" : "left",
+          "text" : "autoscroll",
+          "name" : "label2",
+          "font_size" : 15
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{189, 49}, {125, 35}}",
+        "class" : "Button",
+        "attributes" : {
+          "uuid" : "AC6021C4-6D19-416F-84A9-79404F1A2AC4",
+          "flex" : "L",
+          "corner_radius" : 5,
+          "frame" : "{{472, 368}, {80, 32}}",
+          "border_color" : "RGBA(0.761792,0.761792,0.761792,1.000000)",
+          "border_width" : 1,
+          "tint_color" : "RGBA(0.000000,-0.000000,-0.000000,1.000000)",
+          "title" : "clear console",
+          "action" : "mcmd.clear_textview",
+          "font_bold" : false,
+          "class" : "Button",
+          "name" : "",
+          "font_size" : 15
+        },
+        "selected" : false
+      }
+    ],
+    "frame" : "{{0, 0}, {320, 728}}",
+    "class" : "View",
+    "attributes" : {
+      "enabled" : true,
+      "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)",
+      "tint_color" : "RGBA(0.000000,0.478000,1.000000,1.000000)",
+      "border_color" : "RGBA(0.000000,0.000000,0.000000,1.000000)",
+      "flex" : ""
+    },
+    "selected" : false
+  }
+]

@@ -4,7 +4,7 @@
 #include "utils.h"
 
 void _mode_continous(uint32_t second) {
-  static uint32_t last_second = 0;
+  local_persist uint32_t last_second = 0;
 
   /* entered once per second: */
   if (last_second != second) {
@@ -18,7 +18,7 @@ void _mode_continous(uint32_t second) {
 }
 
 void _mode_step_shoot_step(uint32_t second) {
-  static uint32_t last_second = 0;
+  local_persist uint32_t last_second = 0;
 
   /* entered once per second: */
   if (last_second != second) {
@@ -28,7 +28,7 @@ void _mode_step_shoot_step(uint32_t second) {
 }
 
 void _mode_bulb(uint32_t second) {
-  static uint32_t last_second = 0;
+  local_persist uint32_t last_second = 0;
 
   /* entered once per second: */
   if (last_second != second) {

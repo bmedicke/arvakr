@@ -3,6 +3,9 @@
 
 #include <stdint.h>
 
+#define local_persist   static
+#define global_variable static
+
 void uint16_to_str(uint16_t val, char* target); /* string should be  6 char */
 void uint32_to_str(uint32_t val, char* target); /* string should be 11 char */
 
