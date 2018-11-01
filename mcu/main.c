@@ -3,6 +3,7 @@
 #include "commands.h"
 #include "eexternal_eprom.h"
 #include "modes.h"
+#include "programming_mode.h"
 #include "settings.h"
 #include "timer.h"
 #include "uart.h"
@@ -37,6 +38,7 @@ int main() {
   }
 
   debug_string("\n\r> opened programming mode window.");
+  while (programming_mode_window(second));
   debug_string("\n\r> closed programming mode window.");
 
   for (;;) {
