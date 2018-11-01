@@ -10,8 +10,8 @@ void _mode_continous(uint32_t second) {
   if (last_second != second) {
     char seconds[11];
     uint32_to_str(second, seconds);
-    uart_send_string("\n\r");
-    uart_send_string(seconds);
+    debug_string("\n\r");
+    debug_string(seconds);
   }
 
   last_second = second;

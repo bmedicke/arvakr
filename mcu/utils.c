@@ -1,3 +1,5 @@
+#include "settings.h"
+#include "uart.h"
 #include "utils.h"
 
 /* 2^16-1 =  5 digits + 1 for string terminator */
@@ -18,3 +20,12 @@ void uint32_to_str (uint32_t val, char* target) {
   target[10] = '\0';
 }
 
+void debug_string(char* str) {
+  if (global_settings_get().uart_debug)
+    uart_send_string(str);
+}
+
+void error_string(char* str) {
+  /* TODO: flash status led red */
+  uart_send_string(str);
+}

@@ -6,6 +6,7 @@
 #include "settings.h"
 #include "timer.h"
 #include "uart.h"
+#include "utils.h"
 
 #define UART_BAUD 9600
 #define I2C_SCL 400000
@@ -26,7 +27,7 @@ int main() {
 
   profile p;
   if (!profile_get(&p, global.active_profile))
-    uart_send_string("profile id out of range!");
+    error_string("profile id out of range!");
 
   if (global.uart_debug) {
     global_settings_send();
@@ -35,6 +36,8 @@ int main() {
   }
 
   sei();
+  debug_string("\n\r> opened programming mode window.");
+  debug_string("\n\r> closed programming mode window.");
 
   for (;;) {
     handle_commands();
