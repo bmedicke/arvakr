@@ -22,6 +22,7 @@ int main() {
   uart_init(UART_BAUD);
   external_eeprom_init(I2C_SCL);
   timer_init();
+  sei();
 
   global_settings global = global_settings_get();
 
@@ -35,7 +36,6 @@ int main() {
     external_eeprom_dump();
   }
 
-  sei();
   debug_string("\n\r> opened programming mode window.");
   debug_string("\n\r> closed programming mode window.");
 
