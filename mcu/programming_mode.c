@@ -11,13 +11,15 @@
 #define END_OF_TEXT   ';' //TODO: use '\3'
 
 uint8_t programming_mode_window(uint32_t second) {
+  /* keep track of wheter we already entered programming mode,
+   * to avoid accidental multiple invokations */
   static uint8_t already_executed = 0;
 
   uint8_t c = 0;
   if (uart_receive_nonblocking(&c)) {
     switch (c) {
-      case START_OF_TEXT: /* start of text char. */
-        _programming_mode(); /* keep track of wheter we already entered programming mode */
+      case START_OF_TEXT:
+        _programming_mode();
         already_executed = 1;
         break;
     }
@@ -36,6 +38,7 @@ void _programming_mode() {
   for (;;) {
     uart_receive_nonblocking(&c);
     if (c == END_OF_TEXT) break;
+    /* TODO: deserialize data and save to global settings/profile. */
   }
 
   debug_string("\n\r>> ended programming");
