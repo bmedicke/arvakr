@@ -5,30 +5,25 @@
 #include "uart.h"
 #include "utils.h"
 
-#define WAIT_FOR_SECONDS 10
+#define PROGRAMMING_MODE_WINDOW 10
 
 #define START_OF_TEXT ';' //TODO: use '\2'
 #define END_OF_TEXT   ';' //TODO: use '\3'
 
-uint8_t programming_mode_window(uint32_t second) {
-  /* keep track of wheter we already entered programming mode,
-   * to avoid accidental multiple invokations */
-  static uint8_t already_executed = 0;
+void block_for_programming_mode_window(volatile uint32_t* second) {
+  debug_string("\n\r> opened programming mode window.");
 
   uint8_t c = 0;
-  if (uart_receive_nonblocking(&c)) {
-    switch (c) {
-      case START_OF_TEXT:
-        _programming_mode();
-        already_executed = 1;
-        break;
+
+  while (*second < PROGRAMMING_MODE_WINDOW) {
+    uart_receive_nonblocking(&c);
+    if (c == START_OF_TEXT) {
+      _programming_mode();
+      break;
     }
   }
 
-  if (already_executed || (second >= WAIT_FOR_SECONDS))
-    return 0;
-
-  return 1;
+  debug_string("\n\r> closed programming mode window.");
 }
 
 void _programming_mode() {
