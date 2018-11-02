@@ -12,6 +12,11 @@ void handle_commands() {
         DDRB |= (1 << PB5);
         PORTB ^= (1 << PB5);
         break;
+      case 'R':
+        /* hardware reset by pulling RESET_ low (via resistor). */
+        DDRB |= (1 << PB4);
+        PORTB &= ~(0 << PB4);
+        break;
       case 'r':
         global_settings_set_defaults();
         break;
