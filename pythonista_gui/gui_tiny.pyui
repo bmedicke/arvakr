@@ -9,14 +9,14 @@
         "class" : "Button",
         "attributes" : {
           "uuid" : "AC6021C4-6D19-416F-84A9-79404F1A2AC4",
-          "flex" : "",
+          "flex" : "L",
           "corner_radius" : 5,
           "frame" : "{{472, 368}, {80, 32}}",
           "border_color" : "RGBA(0.761792,0.761792,0.761792,1.000000)",
           "border_width" : 1,
           "tint_color" : "RGBA(0.000000,-0.000000,-0.000000,1.000000)",
           "title" : "upload profile",
-          "action" : "mcmd.upload_profile",
+          "action" : "mcmd.upload",
           "font_bold" : false,
           "class" : "Button",
           "name" : "",
@@ -28,7 +28,7 @@
         "nodes" : [
 
         ],
-        "frame" : "{{6, 379}, {125, 35}}",
+        "frame" : "{{189, 92}, {125, 35}}",
         "class" : "Button",
         "attributes" : {
           "uuid" : "AC6021C4-6D19-416F-84A9-79404F1A2AC4",
@@ -43,9 +43,9 @@
           "font_bold" : false,
           "class" : "Button",
           "name" : "",
-          "flex" : ""
+          "flex" : "L"
         },
-        "selected" : false
+        "selected" : true
       },
       {
         "nodes" : [
@@ -120,30 +120,7 @@
         "nodes" : [
 
         ],
-        "frame" : "{{189, 92}, {125, 35}}",
-        "class" : "Button",
-        "attributes" : {
-          "uuid" : "AC6021C4-6D19-416F-84A9-79404F1A2AC4",
-          "flex" : "",
-          "corner_radius" : 5,
-          "frame" : "{{472, 368}, {80, 32}}",
-          "border_color" : "RGBA(0.761792,0.761792,0.761792,1.000000)",
-          "border_width" : 1,
-          "tint_color" : "RGBA(0.000000,-0.000000,-0.000000,1.000000)",
-          "title" : "window size",
-          "action" : "mcmd.get_size",
-          "font_bold" : false,
-          "class" : "Button",
-          "name" : "",
-          "font_size" : 15
-        },
-        "selected" : false
-      },
-      {
-        "nodes" : [
-
-        ],
-        "frame" : "{{6, 175}, {308, 200}}",
+        "frame" : "{{6, 370}, {308, 200}}",
         "class" : "TextView",
         "attributes" : {
           "uuid" : "C8760445-71C6-4237-AB48-D69B1C3D7852",
@@ -151,14 +128,14 @@
           "corner_radius" : 2,
           "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)",
           "frame" : "{{412, 284}, {200, 200}}",
-          "editable" : true,
+          "editable" : false,
           "border_width" : 1,
           "alignment" : "left",
           "autocorrection_type" : "default",
           "font_name" : "<System>",
           "spellchecking_type" : "default",
           "class" : "TextView",
-          "name" : "textview",
+          "name" : "console_textview",
           "font_size" : 17
         },
         "selected" : false
@@ -167,7 +144,7 @@
         "nodes" : [
 
         ],
-        "frame" : "{{6, 135}, {308, 32}}",
+        "frame" : "{{6, 578}, {308, 32}}",
         "class" : "TextField",
         "attributes" : {
           "action" : "mcmd.new_command",
@@ -179,8 +156,8 @@
           "uuid" : "89A929E1-B66F-4C76-9E80-15D1BAE8AC9B",
           "alignment" : "left",
           "autocorrection_type" : "no",
-          "font_size" : 14,
-          "name" : "textfield"
+          "name" : "textfield",
+          "font_size" : 14
         },
         "selected" : false
       },
@@ -188,7 +165,7 @@
         "nodes" : [
 
         ],
-        "frame" : "{{263, 383}, {51, 31}}",
+        "frame" : "{{263, 622}, {51, 31}}",
         "class" : "Switch",
         "attributes" : {
           "action" : "mcmd.set_autoscroll",
@@ -196,16 +173,16 @@
           "frame" : "{{487, 369}, {51, 31}}",
           "class" : "Switch",
           "uuid" : "351388F3-C2DB-43DA-B938-6934E31B302D",
-          "value" : false,
+          "value" : true,
           "name" : "switch1"
         },
-        "selected" : true
+        "selected" : false
       },
       {
         "nodes" : [
 
         ],
-        "frame" : "{{183, 383}, {72, 31}}",
+        "frame" : "{{189, 622}, {72, 31}}",
         "class" : "Label",
         "attributes" : {
           "flex" : "L",
@@ -215,8 +192,8 @@
           "class" : "Label",
           "alignment" : "left",
           "text" : "autoscroll",
-          "name" : "label2",
-          "font_size" : 15
+          "font_size" : 13,
+          "name" : "label2"
         },
         "selected" : false
       },
@@ -235,11 +212,35 @@
           "border_width" : 1,
           "tint_color" : "RGBA(0.000000,-0.000000,-0.000000,1.000000)",
           "title" : "clear console",
-          "action" : "mcmd.clear_textview",
+          "action" : "mcmd.console_clear",
           "font_bold" : false,
           "class" : "Button",
           "name" : "",
           "font_size" : 15
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{6, 135}, {308, 227}}",
+        "class" : "TextView",
+        "attributes" : {
+          "uuid" : "C8760445-71C6-4237-AB48-D69B1C3D7852",
+          "font_size" : 17,
+          "corner_radius" : 2,
+          "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)",
+          "frame" : "{{412, 284}, {200, 200}}",
+          "editable" : true,
+          "border_width" : 1,
+          "alignment" : "left",
+          "autocorrection_type" : "default",
+          "font_name" : "<System>",
+          "spellchecking_type" : "default",
+          "class" : "TextView",
+          "name" : "payload_textview",
+          "flex" : "WB"
         },
         "selected" : false
       }

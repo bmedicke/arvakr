@@ -56,25 +56,56 @@ class BLEDeviceManager(object):
 
     def did_update_value(self, c, error):
         if c.uuid == 'FFE1':
-            view['textview'].text += c.value.decode().replace('\r', '')
+            view['console_textview'].text += c.value.decode().replace('\r', '')
             if self.autoscroll_enable:
-                view['textview'].content_offset = (
+                view['console_textview'].content_offset = (
                     0,
-                    view['textview'].content_size[1] - view['textview'].height,
+                    view['console_textview'].content_size[1]
+                    - view['console_textview'].height,
                 )
 
-    def upload_profile(self, sender):
+    def upload(self, sender):
         c = self.characteristic
         self.peripheral.write_characteristic_value(c, self.profile.cmd, True)
 
-    def clear_textview(self, sender):
-        view['textview'].text = ''
+    def console_clear(self, sender):
+        view['console_textview'].text = ''
+
+    def console_copy(self, sender):
+        pass
 
     def set_autoscroll(self, sender):
         self.autoscroll_enable = sender.value
 
     def test(self, sender):
-        pass
+        c = self.characteristic
+        self.peripheral.write_characteristic_value(
+            c, ';;', True
+        )  # signal start of text.
+
+    def mcu_reset(self, sender):
+        c = self.characteristic
+        self.peripheral.write_characteristic_value(c, 'R', True)
+
+    def ble_disconnect(self, sender):
+        c = self.characteristic
+        self.peripheral.write_characteristic_value(c, '', True)
+
+    def ble_connect(self, sender):
+        c = self.characteristic
+        self.peripheral.write_characteristic_value(c, '', True)
+
+    def stop(self, sender):
+        c = self.characteristic
+        self.peripheral.write_characteristic_value(c, '', True)
+
+    def pause(self, sender):
+        c = self.characteristic
+        self.peripheral.write_characteristic_value(c, '', True)
+
+    def toggle_led(self, sender):
+        c = self.characteristic
+        self.peripheral.write_characteristic_value(c, 'l', True)
 
     def get_size(self, sender):
         hud_alert(str(ui.get_window_size()))
@@ -115,7 +146,7 @@ width = min(ui.get_window_size())
 if width >= 768:
     view = ui.load_view('gui')
     view.present()
-    view['textview'].editable = False
+    view['console_textview'].editable = False
 
 # split screen and slide out menu:
 elif width == 320 or width == 694 or width == 507:
