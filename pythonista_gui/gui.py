@@ -30,7 +30,7 @@ class BLEDeviceManager(object):
         self.characteristic = None
         self.global_settings = global_settings()
         self.profile = profile_settings()
-        self.autoscroll_enable = 0
+        self.autoscroll_enable = 1
 
     def did_discover_peripheral(self, p):
         if p.name == 'MLT-BT05' and not self.peripheral:
