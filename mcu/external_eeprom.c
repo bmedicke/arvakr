@@ -2,7 +2,7 @@
 #include <util/delay.h>
 #include <util/twi.h> /* two wire interface */
 
-#include "eexternal_eprom.h"
+#include "external_eeprom.h"
 #include "uart.h"
 
 #define EEPROM_ADDRESS 0b10100000 /* last digit must be 0. */

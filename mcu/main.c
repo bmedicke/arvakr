@@ -1,7 +1,7 @@
 #include <avr/interrupt.h>
 
 #include "commands.h"
-#include "eexternal_eprom.h"
+#include "external_eeprom.h"
 #include "modes.h"
 #include "programming_mode.h"
 #include "settings.h"
