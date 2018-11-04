@@ -5,7 +5,7 @@
         "nodes" : [
 
         ],
-        "frame" : "{{17, 321}, {867, 268}}",
+        "frame" : "{{17, 321}, {867, 441}}",
         "class" : "TextView",
         "attributes" : {
           "uuid" : "C8760445-71C6-4237-AB48-D69B1C3D7852",
@@ -23,7 +23,7 @@
           "spellchecking_type" : "no",
           "class" : "TextView",
           "name" : "console_textview",
-          "flex" : "WB"
+          "flex" : "WH"
         },
         "selected" : false
       },
@@ -99,7 +99,7 @@
         "nodes" : [
 
         ],
-        "frame" : "{{892, 358}, {51, 31}}",
+        "frame" : "{{961, 374}, {51, 31}}",
         "class" : "Switch",
         "attributes" : {
           "action" : "mcmd.autoscroll",
@@ -162,15 +162,15 @@
         "nodes" : [
 
         ],
-        "frame" : "{{942, 358}, {82, 31}}",
+        "frame" : "{{902, 371}, {65, 34}}",
         "class" : "Label",
         "attributes" : {
           "flex" : "L",
-          "font_size" : 16,
+          "font_size" : 12,
           "frame" : "{{437, 368}, {150, 32}}",
           "uuid" : "9F60A431-8DF1-4B09-B39D-651D1467C4C7",
           "class" : "Label",
-          "alignment" : "center",
+          "alignment" : "left",
           "text" : "autoscroll",
           "name" : "",
           "font_name" : "<System>"
@@ -355,7 +355,7 @@
           "name" : "textfield1",
           "font_size" : 17
         },
-        "selected" : true
+        "selected" : false
       },
       {
         "nodes" : [
@@ -575,8 +575,8 @@
       "tint_color" : "RGBA(0.000000,0.478000,1.000000,1.000000)",
       "enabled" : true,
       "border_color" : "RGBA(0.000000,0.000000,0.000000,1.000000)",
-      "name" : "Alsvidr - Allgeschwind",
       "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)",
+      "name" : "Alsvidr - Allgeschwind",
       "flex" : ""
     },
     "selected" : false
