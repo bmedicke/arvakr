@@ -67,9 +67,6 @@ class BLEDeviceManager(object):
                 self.characteristic = c
                 self.peripheral.set_notify_value(c, True)
 
-    def did_write_value(self, c, error):
-        pass
-
     def did_update_value(self, c, error):
         if c.uuid == 'FFE1':
             view['console_textview'].text += c.value.decode().replace('\r', '')
@@ -80,18 +77,8 @@ class BLEDeviceManager(object):
                     - view['console_textview'].height,
                 )
 
-    def test(self, sender):
-        c = self.characteristic
-        # self.peripheral.write_characteristic_value(c, self.profile.cmd, True)
-
     def console_clear(self, sender):
         view['console_textview'].text = ''
-
-    def console_copy(self, sender):
-        pass
-
-    def set_autoscroll(self, sender):
-        self.autoscroll_enable = sender.value
 
     def upload(self, sender):
         c = self.characteristic
@@ -99,11 +86,11 @@ class BLEDeviceManager(object):
         payload = (
             str(self.global_settings.version)
             + SEP
-            + str(self.global_settings.autostart)
+            + str(int(self.global_settings.autostart))
             + SEP
-            + str(self.global_settings.status_led)
+            + str(int(self.global_settings.status_led))
             + SEP
-            + str(self.global_settings.uart_debug)
+            + str(int(self.global_settings.uart_debug))
             + SEP
             + str(self.global_settings.active_profile)
             + SEP
@@ -139,41 +126,42 @@ class BLEDeviceManager(object):
     def ble_disconnect(self, sender):
         cb.reset()
 
-    def ble_connect(self, sender):
-        pass
-
-    def stop(self, sender):
-        c = self.characteristic
-        self.peripheral.write_characteristic_value(c, '', True)
-
-    def pause(self, sender):
-        c = self.characteristic
-        self.peripheral.write_characteristic_value(c, '', True)
-
     def toggle_led(self, sender):
         c = self.characteristic
         self.peripheral.write_characteristic_value(c, 'l', True)
 
-    def get_size(self, sender):
-        hud_alert(str(ui.get_window_size()))
-
-    def new_command(self, sender):
-        c = self.characteristic
-        self.peripheral.write_characteristic_value(c, sender.text, True)
-        sender.text = ''
-
-    def load_profile(self, sender):
-        if sender.title == 'continuous':
-            self.profile.drive_mode = 0
-        elif sender.title == 'step-shoot-step':
-            self.profile.drive_mode = 1
-        elif sender.title == 'bulb':
-            self.profile.drive_mode = 2
-
-        hud_alert('selected ' + self.sender.title)
-
     def close(self):
         cb.reset()
+
+    def autoscroll(self, sender):
+        self.autoscroll_enable = sender.value
+
+    def autostart(self, sender):
+        self.global_settings.autostart = sender.value
+
+    def status_led(self, sender):
+        self.global_settings.status_led = sender.value
+
+    def uart_debug(self, sender):
+        self.global_settings.uart_debug = sender.value
+
+    def mode(self, sender):
+        self.profile.drive_mode = sender.selected_index
+
+    def direction(self, sender):
+        self.profile.direction = sender.selected_index
+
+    def cooldown(self, sender):
+        self.profile.cooldown = sender.text
+
+    def step_delay(self, sender):
+        self.profile.step_delay = sender.text
+
+    def startup_delay(self, sender):
+        self.profile.startup_delay = sender.text
+
+    def step_count(self, sender):
+        self.profile.step_count = sender.text
 
 
 mcmd = BLEDeviceManager()
