@@ -183,7 +183,6 @@ elif width == 320 or width == 694 or width == 507:
 
 # fallback
 else:
-    mcmd.get_size(None)
     view = ui.load_view('gui_tiny')
     view.present()
 
