@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <avr/io.h>
+#include <util/delay.h>
 
 #include "settings.h"
 #include "uart.h"
@@ -23,6 +24,17 @@ void handle_commands() {
       case 'i':
         global_settings_send();
         profile_send(global_settings_get().active_profile);
+        break;
+      case 'T':
+        DDRD |= (1<<5)|(1<<6)|(1<<7);
+        PORTD &= ~(1<<5); /* enable driver by pulling /enable low. */
+        for (int i = 0;i < 50;i++) {
+          _delay_us(700);
+          PIND |= (1<<PD7);
+          _delay_us(700);
+        }
+
+        PORTD &= ~(1<<PD7);
         break;
       case '0':
         profile_send(0);

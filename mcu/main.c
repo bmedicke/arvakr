@@ -20,10 +20,16 @@ ISR(TIMER1_OVF_vect) {
   second++;
 }
 
+void stepper_setup() {
+  DDRD |= (1<<5)|(1<<6)|(1<<7);
+  PORTD &= ~(1<<5); /* enable driver by pulling /enable low. */
+}
+
 int main() {
   uart_init(UART_BAUD);
   external_eeprom_init(I2C_SCL);
   timer_init();
+  stepper_setup();
   sei();
 
   global_settings global = global_settings_get();
