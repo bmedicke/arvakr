@@ -36,6 +36,9 @@ class BLEDeviceManager(object):
         if p.name == 'MLT-BT05' and not self.peripheral:
             self.peripheral = p
             cb.connect_peripheral(self.peripheral)
+        elif p.name == 'BT05' and not self.peripheral:
+            self.peripheral = p
+            cb.connect_peripheral(self.peripheral)
 
     def did_connect_peripheral(self, p):
         p.discover_services()
