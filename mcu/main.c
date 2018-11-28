@@ -21,8 +21,8 @@ ISR(TIMER1_OVF_vect) {
 }
 
 void stepper_setup() {
-  DDRD |= (1<<5)|(1<<6)|(1<<7);
-  PORTD &= ~(1<<5); /* enable driver by pulling /enable low. */
+  DDRD |= (1 << PD5) | (1 << PD6) | (1 << PD7);
+  PORTD &= ~(1 << PD5); /* enable driver by pulling /enable low. */
 }
 
 int main() {

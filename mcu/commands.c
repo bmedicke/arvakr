@@ -4,6 +4,24 @@
 
 #include "settings.h"
 #include "uart.h"
+#include "utils.h"
+
+// 0    BT RX
+// 1    BT TX
+// 2    endstop left
+// 3    endstop right
+// 4    reset
+// 5    enable
+// 6    direction
+// 7    step
+// A0   ---
+// A1   camera trigger (mosfet)
+// A2   joystick button
+// A3   x-achse
+// A4   EEPROM
+// A5   EEPROM
+
+uint16_t count = 0;
 
 void handle_commands() {
   uint8_t command;
@@ -25,16 +43,25 @@ void handle_commands() {
         global_settings_send();
         profile_send(global_settings_get().active_profile);
         break;
-      case 'T':
-        DDRD |= (1<<5)|(1<<6)|(1<<7);
-        PORTD &= ~(1<<5); /* enable driver by pulling /enable low. */
-        for (int i = 0;i < 50;i++) {
-          _delay_us(700);
-          PIND |= (1<<PD7);
-          _delay_us(700);
+      case 'h': {
+        while (1) {
+          _delay_ms(1000);
+          char s[255];
+          uint16_to_str(count++, s);
+          uart_send_string(s);
+          uart_send_string("\n\r");
+
+          DDRD |= (1 << PD5) | (1 << PD6) | (1 << PD7);
+          PORTD &= ~(1 << PD5); /* enable driver by pulling /enable low. */
+          for (int i = 0; i < 50; i++) {
+            _delay_us(1);
+            PIND |= (1 << PD7);
+            _delay_us(1);
+          }
+          PORTD &= ~(1 << PD7);
         }
-        PORTD &= ~(1<<PD7);
         break;
+      }
       case '0':
         profile_send(0);
         break;
