@@ -33,7 +33,6 @@ void handle_commands() {
           PIND |= (1<<PD7);
           _delay_us(700);
         }
-
         PORTD &= ~(1<<PD7);
         break;
       case '0':
@@ -41,30 +40,6 @@ void handle_commands() {
         break;
       case '1':
         profile_send(1);
-        break;
-      case '2':
-        profile_send(2);
-        break;
-      case '3':
-        profile_send(3);
-        break;
-      case '4':
-        profile_send(4);
-        break;
-      case '5':
-        profile_send(5);
-        break;
-      case '6':
-        profile_send(6);
-        break;
-      case '7':
-        profile_send(7);
-        break;
-      case '8':
-        profile_send(8);
-        break;
-      case '9':
-        profile_send(9);
         break;
       default:
         uart_transmit('?');
