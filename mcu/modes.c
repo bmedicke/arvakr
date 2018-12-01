@@ -48,6 +48,8 @@ void handle_mode(uint8_t mode, uint32_t second) {
     case bulb:
       _mode_bulb(second);
       break;
+    default:
+      _mode_continous(second);
   }
 }
 

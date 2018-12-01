@@ -25,6 +25,10 @@ void stepper_setup() {
   PORTD &= ~(1 << PD5); /* enable driver by pulling /enable low. */
 }
 
+
+// TODO: ADC init.
+// TODO: stepper setup.
+
 int main() {
   uart_init(UART_BAUD);
   external_eeprom_init(I2C_SCL);
@@ -42,7 +46,7 @@ int main() {
     global_settings_send();
     profile_send(global.active_profile);
     // TODO: check if eeprom online!
-    /* external_eeprom_dump(); */
+    external_eeprom_dump();
   }
 
   block_for_programming_mode_window(&second);

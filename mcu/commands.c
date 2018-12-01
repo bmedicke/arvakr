@@ -31,45 +31,75 @@ void handle_commands() {
         DDRB |= (1 << PB5);
         PORTB ^= (1 << PB5);
         break;
+      case 'e':
+        {
+          DDRD |= (1 << PD2); // input.
+          PORTD |= (1 << PD2); // enable pullup.
+          while (1) {
+            if (PIND & (1 << PD2)) uart_send_string("\n\rzu");
+            else uart_send_string("\n\roffen");
+            _delay_ms(300);
+          }
+        }
       case 'R':
         /* hardware reset by pulling RESET_ low (via resistor). */
-        DDRB |= (1 << PB4);
-        PORTB &= ~(0 << PB4);
+        DDRD |= (1 << PD4);
+        PORTD &= ~(0 << PD4);
         break;
       case 'r':
         global_settings_set_defaults();
+        break;
+      case 't':
+        {
+          DDRC |= (1 << PC1);
+          PORTC |= (1 << PC1);
+          _delay_ms(200);
+          PORTC &= ~(1 << PC1);
+        }
         break;
       case 'i':
         global_settings_send();
         profile_send(global_settings_get().active_profile);
         break;
       case 'h': {
-        while (1) {
-          _delay_ms(1000);
-          char s[255];
-          uint16_to_str(count++, s);
-          uart_send_string(s);
-          uart_send_string("\n\r");
+                  while (1) {
+                    char s[255];
+                    uint16_to_str(count++, s);
+                    uart_send_string(s);
+                    uart_send_string("\n\r");
 
-          DDRD |= (1 << PD5) | (1 << PD6) | (1 << PD7);
-          PORTD &= ~(1 << PD5); /* enable driver by pulling /enable low. */
-          for (int i = 0; i < 50; i++) {
-            _delay_us(1);
-            PIND |= (1 << PD7);
-            _delay_us(1);
-          }
-          PORTD &= ~(1 << PD7);
-        }
-        break;
-      }
+                    // 1. step:
+                    for (int i = 0; i < 50; i++) {
+                      _delay_us(1);
+                      PIND |= (1 << PD7); // toggle motor.
+                      _delay_us(1);
+                    }
+                    PORTD &= ~(1 << PD7);
+
+                    // 2. wait for vibrations to settle:
+                    _delay_ms(3800);
+
+                    // 3. trigger camera:
+                    {
+                      DDRC |= (1 << PC1);
+                      PORTC |= (1 << PC1);
+                      _delay_ms(200);
+                      PORTC &= ~(1 << PC1);
+                    }
+
+                    // 4. wait for camera:
+                    _delay_ms(5000);
+                  }
+                  break;
+                }
       case '0':
-        profile_send(0);
-        break;
+                profile_send(0);
+                break;
       case '1':
-        profile_send(1);
-        break;
+                profile_send(1);
+                break;
       default:
-        uart_transmit('?');
+                uart_transmit('?');
     }
   }
 }
