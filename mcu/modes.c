@@ -12,6 +12,10 @@ void _mode_continous(uint32_t second) {
     uint32_to_str(second, seconds);
     debug_string("\n\r");
     debug_string(seconds);
+    /*TODO*/
+//while (!deadzone)
+  //if(button) = foto
+//else zonen abfragen
   }
 
   last_second = second;
