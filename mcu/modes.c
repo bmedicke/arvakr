@@ -2,6 +2,7 @@
 #include "settings.h"
 #include "uart.h"
 #include "utils.h"
+#include "adc.h"
 
 void _mode_continous(uint32_t second) {
   local_persist uint32_t last_second = 0;
