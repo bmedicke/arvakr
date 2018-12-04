@@ -33,6 +33,7 @@ int main() {
   uart_init(UART_BAUD);
   external_eeprom_init(I2C_SCL);
   timer_init();
+  adc_init();
   stepper_setup();
   sei();
 
