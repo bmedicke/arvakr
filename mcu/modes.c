@@ -121,13 +121,13 @@ void _mode_step_shoot_step(uint32_t second) {
 
   if (last_second != second) {
   }
-  //global_settings global = global_settings_get();
+  global_settings global = global_settings_get();
 
 
 
-  //profile p;
+  profile p;
   //for SSS mode
-  //profile_get(&p, global_settings.active_profile());
+  profile_get(&p, global_settings.active_profile());
 
   while(1){
     //TODO
