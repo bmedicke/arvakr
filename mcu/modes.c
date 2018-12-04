@@ -1,15 +1,25 @@
+#include <stdint.h>
+#include <avr/io.h>
+#include <util/delay.h>
+
 #include "modes.h"
 #include "settings.h"
 #include "uart.h"
 #include "utils.h"
 #include "adc.h"
 
+
 void _mode_continous(uint32_t second) {
   local_persist uint32_t last_second = 0;
-adc.init();
-uint16_t joystickX = adc_read(3);
+adc_init();
+
+
+DDRD |= (1 << PD6); //output
 DDRC |= (1 << PC2); // input.
 PORTC |= (1 << PC2); // enable pullup.
+//Endstops
+DDRD &= ~((1 << PD2) | (1 << PD3)); // input. irgendwo falsch
+PORTD |= (1 << PD2) | (1 << PD3); // enable pullup.
   /* entered once per second: */
   if (last_second != second) {
     char seconds[11];
@@ -20,27 +30,84 @@ PORTC |= (1 << PC2); // enable pullup.
   }
   /* TODO: Joystick fahren */
 //while (!deadzone)
-if(PINC & (1<<PC2)){
+if(!(PINC & (1<<PC2))){
   DDRC |= (1 << PC1);
   PORTC |= (1 << PC1);
   _delay_ms(200);
   PORTC &= ~(1 << PC1);
+
+  uart_send_string("i bims ein button\n\r");
 }
-while (!(joystickX >= 480 && joystickX <= 544)){
-
-  if(joystickX >= 0 && joystickX<=159){//left fullspeed
-
+while (1) {
+// while (!(joystickX >= 440 && joystickX <= 584)){
+uint16_t joystickX = adc_read(3);
+uint8_t left_endstop_activ, right_endstop_activ;
+if(PIND & (1<<PD3)){
+  left_endstop_activ = 1; //pressed
+}else{
+  left_endstop_activ = 0; //not pressed
+}
+if(PIND &(1<<PD2)){
+  right_endstop_activ = 1;//pressed
+}else{
+  right_endstop_activ = 0;//not pressed
+}
+if (joystickX >= 480 && joystickX <= 544){
+  break;
+}
+if(left_endstop_activ){
+if(joystickX >= 0 && joystickX<=159){//left fullspeed
+      PORTD |= (1 << PD6); //pin high (direction left)
+      for(int i = 0; i<10;i++){
+      _delay_us(1);
+      PIND |= (1 << PD7); // toggle motor.
+    }
+uart_send_string("i bims links schnell\n\r");
   }else if(joystickX >= 160 && joystickX<=319){//left normal speed
+    PORTD |= (1 << PD6); //pin high (direction left)
+    for(int i = 0; i<10;i++){
+    _delay_us(10);
+    PIND |= (1 << PD7); // toggle motor.
+  }
+      uart_send_string("i bims links normal\n\r");
 
   }else if(joystickX >= 320 && joystickX<=479){//left low speed
-
-  }else if(joystickX >= 545 && joystickX<=704){//right low speed
-
-  }else if(joystickX >= 705 && joystickX<=864){//right normal speed
-
-  }else if(joystickX >= 865 && joystickX<=1023){//right fullspeed
+    PORTD |= (1 << PD6); //pin high (direction left)
+    for(int i = 0; i<10;i++){
+    _delay_us(100);
+    PIND |= (1 << PD7); // toggle motor.
+  }
+      uart_send_string("i bims links langsam\n\r");
 
   }
+}
+if(right_endstop_activ){
+if(joystickX >= 545 && joystickX<=704){//right low speed
+      PORTD &= ~(1 << PD6); //pin low (direction right)
+      for(int i = 0; i<10;i++){
+      _delay_us(100);
+      PIND |= (1 << PD7); // toggle motor.
+    }
+      uart_send_string("i bims rechts langsam\n\r");
+
+  }else if(joystickX >= 705 && joystickX<=864){//right normal speed
+      PORTD &= ~(1 << PD6); //pin low (direction right)
+      for(int i = 0; i<10;i++){
+      _delay_us(10);
+      PIND |= (1 << PD7); // toggle motor.
+    }
+      uart_send_string("i bims rechts normal\n\r");
+
+  }else if(joystickX >= 865 && joystickX<=1023){//right fullspeed
+      PORTD &= ~(1 << PD6); //pin low (direction right)
+      for(int i = 0; i<10;i++){
+      _delay_us(1);
+      PIND |= (1 << PD7); // toggle motor.
+    }
+      uart_send_string("i bims rechts schnell\n\r");
+
+  }
+}
 
 }
 //Video während dem fahren triggern?
@@ -54,19 +121,21 @@ void _mode_step_shoot_step(uint32_t second) {
   /* entered once per second: */
 
   //Endstops
-  DDRD |= (1 << PD2) | (1 << PD3); // input.
+  DDRD &= ~((1 << PD2) | (1 << PD3)); // input. irgendwo falsch
   PORTD |= (1 << PD2) | (1 << PD3); // enable pullup.
+  DDRD |= (1 << PD6); //output
+
 
   if (last_second != second) {
   }
-  global_settings global = global_settings_get();
+  //global_settings global = global_settings_get();
 
 
 
-  profile p;
-  if(global_settings.active_profile() == 1) {//for SSS mode
-    profile_get(&p, global_settings.active_profile());
-  }
+  //profile p;
+  //for SSS mode
+  //profile_get(&p, global_settings.active_profile());
+
   while(1){
     //TODO
     //von eeprom lesen?
@@ -80,18 +149,32 @@ void _mode_step_shoot_step(uint32_t second) {
       _delay_ms(300);
     }
 
+
+  //_delay_ms(p.startup_delay());
+
   // 1. step:
-  _delay_ms(p.startup_delay());
-  if(p.direction() == "left")//if which direction set stepper in the other direction
+  //0 = nach links
+  //1 = nach rechts
+  /*if(p.direction() == 0){
+    PORTD |= (1 << PD6); //pin high (direction left)
+  }else{
+    PORTD &= ~(1 << PD6); //pin low (direction right)
+  }
+
+  */
+
   for (int i = 0; i < 50; i++) {
-    _delay_us(p.step_delay());
+    //_delay_us(p.step_delay());
+    _delay_us(1);
     PIND |= (1 << PD7); // toggle motor.
-    _delay_us(p.step_delay());
+    //_delay_us(p.step_delay());
+    _delay_us(1);
   }
   PORTD &= ~(1 << PD7);
 
   // 2. wait for vibrations to settle:
-  _delay_ms(p.cooldown());//todo cooldown
+  _delay_ms(1000);
+  //_delay_ms(p.cooldown());//todo cooldown
 
   // 3. trigger camera:
   {
@@ -102,7 +185,7 @@ void _mode_step_shoot_step(uint32_t second) {
   }
 
   // 4. wait for camera:
-  _delay_ms(5000);//todo
+  _delay_ms(1000);//todo
 
 }
   last_second = second;
