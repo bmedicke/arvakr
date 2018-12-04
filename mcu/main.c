@@ -1,5 +1,6 @@
 #include <avr/interrupt.h>
 
+#include "adc.h"
 #include "commands.h"
 #include "external_eeprom.h"
 #include "modes.h"
