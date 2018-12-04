@@ -47,6 +47,8 @@ void handle_commands() {
         break;
       case 'r':
         global_settings_set_defaults();
+        uint8_t i = 0;
+        for (; i < 20; i++) profile_set_defaults(i);
         break;
       case 't': {
         DDRC |= (1 << PC1);
@@ -95,6 +97,9 @@ void handle_commands() {
         break;
       case '1':
         profile_send(1);
+        break;
+      case '2':
+        profile_send(2);
         break;
       default:
         uart_transmit('?');
