@@ -49,48 +49,46 @@ void sixteenthstep() {
 }
 
 
-void joystick_leftFullspeed() {
+void joystick_rightFullspeed() {
   PORTD &= ~(1 << dirPin);
-  _delay_us(1);
+  _delay_ms(1);
   PIND |= (1 << stepPin);
-  _delay_us(1);
+  
 }
 
-void joystick_leftNormalspeed() {
+void joystick_rightNormalspeed() {
   PORTD &= ~(1 << dirPin);
-  _delay_us(700);
+  _delay_ms(5);
   PIND |= (1 << stepPin);
-  _delay_us(700);
-}
-
-void joystick_leftLowspeed() {
-  PORTD &= ~(1 << dirPin);
-  _delay_ms(500);
-  PIND |= (1 << stepPin);
-  _delay_ms(500);
+  
 }
 
 void joystick_rightLowspeed() {
-  PORTD |= (1 << dirPin);
-  _delay_ms(500);
+  PORTD &= ~(1 << dirPin);
+  _delay_ms(10);
   PIND |= (1 << stepPin);
-  _delay_ms(500);
+  _delay_ms(10);
+}
+
+void joystick_leftLowspeed() {
+  PORTD |= (1 << dirPin);
+  _delay_ms(10);
+  PIND |= (1 << stepPin);
 }
 
 
-void joystick_rightNormalspeed() {
+void joystick_leftNormalspeed() {
   PORTD |= (1 << dirPin);
-  _delay_us(700);
+  _delay_ms(5);
   PIND |= (1 << stepPin);
-  _delay_us(700);
 }
 
 
-void joystick_rightFullspeed() {
+void joystick_leftFullspeed() {
   PORTD |= (1 << dirPin);
-  _delay_us(1);
+  _delay_ms(1);
   PIND |= (1 << stepPin);
-  _delay_us(1);
+  
 }
 
 
@@ -110,7 +108,13 @@ int main(void) {
 
   while (1) {
 
+//joystick_rightFullspeed();
+//joystick_rightNormalspeed();
+//joystick_rightLowspeed();
 
+//joystick_leftFullspeed();
+//joystick_leftNormalspeed();
+joystick_leftLowspeed();
 
   }
 }
