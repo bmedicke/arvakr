@@ -53,14 +53,14 @@ void joystick_rightFullspeed() {
   PORTD &= ~(1 << dirPin);
   _delay_ms(1);
   PIND |= (1 << stepPin);
-  
+
 }
 
 void joystick_rightNormalspeed() {
   PORTD &= ~(1 << dirPin);
   _delay_ms(5);
   PIND |= (1 << stepPin);
-  
+
 }
 
 void joystick_rightLowspeed() {
@@ -88,7 +88,7 @@ void joystick_leftFullspeed() {
   PORTD |= (1 << dirPin);
   _delay_ms(1);
   PIND |= (1 << stepPin);
-  
+
 }
 
 
