@@ -1,5 +1,5 @@
-#include <stdint.h>
 #include <avr/io.h>
+#include <stdint.h>
 #include <util/delay.h>
 
 #include "settings.h"
@@ -27,10 +27,6 @@ void handle_commands() {
   uint8_t command;
   if (uart_receive_nonblocking(&command)) {
     switch (command) {
-      case 'l':
-        DDRB |= (1 << PB5);
-        PORTB ^= (1 << PB5);
-        break;
       case 'e': {
         DDRD |= (1 << PD2); // input.
         PORTD |= (1 << PD2); // enable pullup.
@@ -49,6 +45,7 @@ void handle_commands() {
         global_settings_set_defaults();
         uint8_t i = 0;
         for (; i < 20; i++) profile_set_defaults(i);
+        uart_send_string("\n\rwrote default values to eeprom\n\r");
         break;
       case 't': {
         DDRC |= (1 << PC1);
@@ -61,7 +58,7 @@ void handle_commands() {
         global_settings_send();
         profile_send(global_settings_get().active_profile);
         break;
-      case 'h': {
+      case 'T': {
         while (1) {
           char s[255];
           uint16_to_str(count++, s);
@@ -99,8 +96,7 @@ void handle_commands() {
         profile_send(1);
         break;
       case '2':
-        profile_send(2);
-        break;
+        profile_send(2); break;
       default:
         uart_transmit('?');
     }

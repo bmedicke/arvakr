@@ -27,11 +27,12 @@ void block_for_programming_mode_window(volatile uint32_t* second) {
 }
 
 void _programming_mode() {
-  debug_string("\n\r>> started programming");
+  debug_string("\n\r>> started programming\n\r");
 
   uint8_t c = 0;
   for (;;) {
     uart_receive_nonblocking(&c);
+    uart_transmit(c);
     if (c == END_OF_TEXT) break;
     /* TODO: deserialize data and save to global settings/profile. */
   }
