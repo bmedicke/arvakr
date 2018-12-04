@@ -103,19 +103,19 @@ void microstep() {
 }
 
 
-int main(void) {
-  init();
+/* int main(void) { */
+/*   init(); */
 
-  while (1) {
+/*   while (1) { */
 
-//joystick_rightFullspeed();
-//joystick_rightNormalspeed();
-//joystick_rightLowspeed();
+/* //joystick_rightFullspeed(); */
+/* //joystick_rightNormalspeed(); */
+/* //joystick_rightLowspeed(); */
 
-//joystick_leftFullspeed();
-//joystick_leftNormalspeed();
-joystick_leftLowspeed();
+/* //joystick_leftFullspeed(); */
+/* //joystick_leftNormalspeed(); */
+/* joystick_leftLowspeed(); */
 
-  }
-}
+/*   } */
+/* } */
 
