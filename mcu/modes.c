@@ -42,12 +42,12 @@ while (1) {
 // while (!(joystickX >= 440 && joystickX <= 584)){
 uint16_t joystickX = adc_read(3);
 uint8_t left_endstop_activ, right_endstop_activ;
-if(PIND & (1<<PD3)){
+if(PIND & (1<<PD3)){//left
   left_endstop_activ = 1; //pressed
 }else{
   left_endstop_activ = 0; //not pressed
 }
-if(PIND &(1<<PD2)){
+if(PIND &(1<<PD2)){//right
   right_endstop_activ = 1;//pressed
 }else{
   right_endstop_activ = 0;//not pressed
@@ -62,14 +62,12 @@ if(joystickX >= 0 && joystickX<=159){//left fullspeed
       _delay_us(1);
       PIND |= (1 << PD7); // toggle motor.
     }
-uart_send_string("i bims links schnell\n\r");
   }else if(joystickX >= 160 && joystickX<=319){//left normal speed
     PORTD |= (1 << PD6); //pin high (direction left)
     for(int i = 0; i<10;i++){
     _delay_us(10);
     PIND |= (1 << PD7); // toggle motor.
   }
-      uart_send_string("i bims links normal\n\r");
 
   }else if(joystickX >= 320 && joystickX<=479){//left low speed
     PORTD |= (1 << PD6); //pin high (direction left)
@@ -77,7 +75,6 @@ uart_send_string("i bims links schnell\n\r");
     _delay_us(100);
     PIND |= (1 << PD7); // toggle motor.
   }
-      uart_send_string("i bims links langsam\n\r");
 
   }
 }
@@ -88,7 +85,6 @@ if(joystickX >= 545 && joystickX<=704){//right low speed
       _delay_us(100);
       PIND |= (1 << PD7); // toggle motor.
     }
-      uart_send_string("i bims rechts langsam\n\r");
 
   }else if(joystickX >= 705 && joystickX<=864){//right normal speed
       PORTD &= ~(1 << PD6); //pin low (direction right)
@@ -96,7 +92,6 @@ if(joystickX >= 545 && joystickX<=704){//right low speed
       _delay_us(10);
       PIND |= (1 << PD7); // toggle motor.
     }
-      uart_send_string("i bims rechts normal\n\r");
 
   }else if(joystickX >= 865 && joystickX<=1023){//right fullspeed
       PORTD &= ~(1 << PD6); //pin low (direction right)
@@ -104,8 +99,6 @@ if(joystickX >= 545 && joystickX<=704){//right low speed
       _delay_us(1);
       PIND |= (1 << PD7); // toggle motor.
     }
-      uart_send_string("i bims rechts schnell\n\r");
-
   }
 }
 
