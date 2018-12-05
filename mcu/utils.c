@@ -2,6 +2,15 @@
 #include "uart.h"
 #include "utils.h"
 
+/* 2^8-1 =  3 digits + 1 for string terminator */
+void uint8_to_str (uint8_t val, char* target) {
+  for (int i = 2; i >= 0; i--) {
+    target [i] = val % 10 + '0';
+    val /= 10;
+  }
+  target[3] = '\0';
+}
+
 /* 2^16-1 =  5 digits + 1 for string terminator */
 void uint16_to_str (uint16_t val, char* target) {
   for (int i = 4; i >= 0; i--) {
