@@ -36,8 +36,6 @@ void _mode_continous(uint32_t second) {
     PORTC |= (1 << PC1);
     _delay_ms(200);
     PORTC &= ~(1 << PC1);
-
-    uart_send_string("i bims ein button\n\r");
   }
   while (1) {
 // while (!(joystickX >= 440 && joystickX <= 584)){
@@ -53,24 +51,24 @@ void _mode_continous(uint32_t second) {
     } else {
       right_endstop_activ = 0;//not pressed
     }
-    if (joystickX >= 480 && joystickX <= 544) {
+    if (joystickX >= 500 && joystickX <= 524) {
       break;
     }
     if (left_endstop_activ) {
-      if (joystickX >= 0 && joystickX <= 159) { //left fullspeed
+      if (joystickX >= 0 && joystickX <= 3) { //left fullspeed
         joystick_leftFullspeed();
-      } else if (joystickX >= 160 && joystickX <= 319) { //left normal speed
+      } else if (joystickX >= 4 && joystickX <= 219) { //left normal speed
         joystick_leftNormalspeed();
-      } else if (joystickX >= 320 && joystickX <= 479) { //left low speed
+      } else if (joystickX >= 220 && joystickX <= 499) { //left low speed
         joystick_leftLowspeed();
       }
     }
     if (right_endstop_activ) {
-      if (joystickX >= 545 && joystickX <= 704) { //right low speed
+      if (joystickX >= 525 && joystickX <= 804) { //right low speed
         joystick_rightLowspeed();
-      } else if (joystickX >= 705 && joystickX <= 864) { //right normal speed
+      } else if (joystickX >= 805 && joystickX <= 1019) { //right normal speed
         joystick_rightNormalspeed();
-      } else if (joystickX >= 865 && joystickX <= 1023) { //right fullspeed
+      } else if (joystickX >= 1020 && joystickX <= 1023) { //right fullspeed
         joystick_rightFullspeed();
       }
     }
@@ -100,7 +98,13 @@ void _mode_step_shoot_step(uint32_t second) {
 
   profile p;
   //for SSS mode
-  profile_get(&p, global_settings.active_profile());
+  profile_get(&p, global.active_profile);
+  p.direction = 1;
+  if(p.direction == 0){
+    PORTD &= ~(1 << PD6);
+  }else{
+      PORTD |= (1 << PD6);
+  }
 
   while (1) {
     //TODO
@@ -109,11 +113,17 @@ void _mode_step_shoot_step(uint32_t second) {
     //notlösung: abfragen ob notstop erreicht wurde !!!! vor schritt 1
     //variabel machen
 
-    if (PIND & (1 << PD2)) {
-      //or other change direction
+    if (PIND & (1 << PD3)) { //left
+      PORTD |= (1 << PD6);
+      uart_send_string("left endstop hit");
+    }
+    if (PIND & (1 << PD2)) { //right
+      PORTD &= ~(1 << PD6);
+      uart_send_string("right endstop hit");
+    }
 
       _delay_ms(300);
-    }
+
 
 
     //_delay_ms(p.startup_delay());
