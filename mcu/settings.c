@@ -68,15 +68,17 @@ uint8_t profile_set_defaults(uint8_t id) {
   if (id >= NUMBER_OF_PROFILES) return 0;
 
   profile p;
-  p.cooldown = 0;
-  p.direction = 0;
+  //p.cooldown = 0;
   p.drive_mode = 0;
-  p.dynamic_curve = 0;
   p.profile_version = 0;
-  p.startup_delay = 0;
-  p.step_count = 0;
-  p.step_delay = 0;
   p.CRC = 0;
+  //Step-Shoot-Step variables
+  p.direction = 0;
+  p.startup_delay = 0; //seconds
+  p.step_speed = 1; //mirco seconds
+  p.vibrations_duration = 3; //seconds
+  p.relay_trigger_duration = 200;//milliseconds
+  p.shutter_delay = 1; //seconds
 
   uint16_t destination_address = PROFILE_START_ADDRESS + (id * PROFILE_SIZE);
   eeprom_update_block(&p, (void*) destination_address, sizeof(p));
@@ -84,6 +86,7 @@ uint8_t profile_set_defaults(uint8_t id) {
 }
 
 void profile_send(uint8_t id) {
+  /*
   profile p;
   profile_get(&p, id);
   char s[11];
@@ -116,5 +119,5 @@ void profile_send(uint8_t id) {
   uint32_to_str(p.startup_delay, s);
   uart_send_string(s);
   uart_send_string("\n\r");
+  */
 }
-
