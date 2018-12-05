@@ -83,11 +83,12 @@ void _mode_step_shoot_step(uint32_t second) {
   local_persist uint32_t last_second = 0;
 //eeprom einlesen
   /* entered once per second: */
+  DDRD |= (1 << PD6); //output
 
   //Endstops
-  DDRD &= ~((1 << PD2) | (1 << PD3)); // input. irgendwo falsch
-  PORTD |= (1 << PD2) | (1 << PD3); // enable pullup.
-  DDRD |= (1 << PD6); //output
+    DDRD &= ~((1 << PD2) | (1 << PD3)); // input. irgendwo falsch
+    PORTD |= (1 << PD2) | (1 << PD3); // enable pullup.
+
 
 
   if (last_second != second) {
@@ -99,69 +100,59 @@ void _mode_step_shoot_step(uint32_t second) {
   profile p;
   //for SSS mode
   profile_get(&p, global.active_profile);
-  p.direction = 1;
+
+//TODO WIESO MUSS DAS INVERTIERT SEIN, kann auch da sein
+
   if(p.direction == 0){
     PORTD &= ~(1 << PD6);
   }else{
       PORTD |= (1 << PD6);
   }
 
+
+  for (int c = 0; c<=p.startup_delay; c++) _delay_ms(1000);
+
   while (1) {
     //TODO
     //von eeprom lesen?
-    //todo endstop = richtungswechsel oder stop
     //notlösung: abfragen ob notstop erreicht wurde !!!! vor schritt 1
     //variabel machen
 
-    if (PIND & (1 << PD3)) { //left
-      PORTD |= (1 << PD6);
-      uart_send_string("left endstop hit");
-    }
-    if (PIND & (1 << PD2)) { //right
+
+//TODO WIESO MUSS DAS INVERTIERT SEIN!!!!!!
+    //endstops
+    if (!(PIND & (1 << PD3))) { //left
       PORTD &= ~(1 << PD6);
-      uart_send_string("right endstop hit");
+      uart_send_string("left endstop hit\n\r");
+    } else if (!(PIND & (1 << PD2))) { //right
+      PORTD |= (1 << PD6);
+      uart_send_string("right endstop hit\n\r");
     }
 
-      _delay_ms(300);
+      //_delay_ms(300);
 
 
-
-    //_delay_ms(p.startup_delay());
-
-    // 1. step:
-    //0 = nach links
-    //1 = nach rechts
-    /*if(p.direction() == 0){
-      PORTD |= (1 << PD6); //pin high (direction left)
-    }else{
-      PORTD &= ~(1 << PD6); //pin low (direction right)
-    }
-
-    */
 
     for (int i = 0; i < 50; i++) {
-      //_delay_us(p.step_delay());
-      _delay_us(1);
-      PIND |= (1 << PD7); // toggle motor.
-      //_delay_us(p.step_delay());
-      _delay_us(1);
+      for (int c = 0; c<=p.step_speed; c++) _delay_us(1);
+      PIND |= (1 << PD7); // toggle motor
+      for (int c = 0; c<=p.step_speed; c++) _delay_us(1);
     }
     PORTD &= ~(1 << PD7);
 
     // 2. wait for vibrations to settle:
-    _delay_ms(1000);
-    //_delay_ms(p.cooldown());//todo cooldown
+    for (int c = 0; c<=p.vibrations_duration; c++) _delay_ms(1000);//todo cooldown
 
     // 3. trigger camera:
     {
       DDRC |= (1 << PC1);
       PORTC |= (1 << PC1);
-      _delay_ms(200);//hardcoded
+      for (int c = 0; c<=p.relay_trigger_duration; c++) _delay_ms(1);//hardcoded
       PORTC &= ~(1 << PC1);
     }
 
     // 4. wait for camera:
-    _delay_ms(1000);//todo
+    for (int c = 0; c<=p.shutter_delay; c++) _delay_ms(1000);//todo
 
   }
   last_second = second;
