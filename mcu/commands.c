@@ -14,7 +14,7 @@
 // 5    enable
 // 6    direction
 // 7    step
-// A0   ---
+// A0   microstep (halfstep)
 // A1   camera trigger (mosfet)
 // A2   joystick button
 // A3   x-achse
