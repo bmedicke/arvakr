@@ -96,7 +96,8 @@ void handle_commands() {
         profile_send(1);
         break;
       case '2':
-        profile_send(2); break;
+        profile_send(2);
+        break;
       default:
         uart_transmit('?');
     }
