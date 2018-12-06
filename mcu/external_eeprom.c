@@ -32,8 +32,8 @@ void _twi_write(uint8_t value) {
   while ((TWCR & (1 << TWINT)) == 0); /* block until transmission complete. */
 }
 
-void _twi_send_address(uint8_t target) {
-  _twi_write((uint8_t)target >> 8);   /* 8 MSB. */
+void _twi_send_address(uint16_t target) {
+  _twi_write(target >> 8);   /* 8 MSB. */
   _twi_write((uint8_t)target & 0xFF); /* 8 LSB. */
 }
 
@@ -47,7 +47,7 @@ void external_eeprom_init(uint32_t scl) {
   TWCR = (1 << TWEN); /* enable TWI. */
 }
 
-void external_eeprom_write_byte(uint8_t target, uint8_t value) {
+void external_eeprom_write_byte(uint16_t target, uint8_t value) {
   _twi_start();
 
   _twi_write(EEPROM_ADDRESS | WRITE_MODE); /* select device and mode. */
@@ -59,7 +59,7 @@ void external_eeprom_write_byte(uint8_t target, uint8_t value) {
   _delay_ms(WRITE_CYCLE_TIME_IN_MS);
 }
 
-uint8_t external_eeprom_read_byte(uint8_t target) {
+uint8_t external_eeprom_read_byte(uint16_t target) {
   uint8_t value = 0;
   _twi_start();
 
@@ -74,7 +74,7 @@ uint8_t external_eeprom_read_byte(uint8_t target) {
   return value;
 }
 
-void external_eeprom_update_byte(uint8_t target, uint8_t value) {
+void external_eeprom_update_byte(uint16_t target, uint8_t value) {
   uint8_t byte = external_eeprom_read_byte(target);
   if (value != byte)
     external_eeprom_write_byte(target, value);
