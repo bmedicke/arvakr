@@ -84,7 +84,6 @@ uint8_t profile_set_defaults(uint8_t id) {
   return 1;
 }
 
-/* TODO: update profile_send */
 void profile_send(uint8_t id) {
   profile p;
   profile_get(&p, id);

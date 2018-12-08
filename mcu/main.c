@@ -48,7 +48,6 @@ int main() {
   }
 
   block_for_programming_mode_window(&second);
-  /* TODO: reread settings, if we entered programming mode! */
 
   for (;;) {
     handle_commands();
