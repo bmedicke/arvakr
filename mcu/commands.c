@@ -6,20 +6,20 @@
 #include "uart.h"
 #include "utils.h"
 
-// 0    BT RX
-// 1    BT TX
-// 2    endstop left
-// 3    endstop right
-// 4    reset
-// 5    enable
-// 6    direction
-// 7    step
-// A0   microstep (halfstep)
-// A1   camera trigger (mosfet)
-// A2   joystick button
-// A3   x-achse
-// A4   EEPROM
-// A5   EEPROM
+// 0   PD0    BT RX
+// 1   PD1    BT TX
+// 2   PD2    endstop left
+// 3   PD3    endstop right
+// 4   PD4    hardware reset
+// 5   PD5    stepper enable
+// 6   PD6    stepper direction
+// 7   PD7    stepper step
+// A0  PC0    microstep (halfstep)
+// A1  PC1    camera trigger (mosfet)
+// A2  PC2    joystick button
+// A3  PC3    x-achse
+// A4  PC4    EEPROM
+// A5  PC5    EEPROM
 
 uint16_t count = 0;
 
