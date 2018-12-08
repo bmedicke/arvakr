@@ -129,10 +129,6 @@ void _mode_step_shoot_step(uint32_t second) {
       uart_send_string("right endstop hit\n\r");
     }
 
-      //_delay_ms(300);
-
-
-
     for (int i = 0; i < 50; i++) {
       for (int c = 0; c<=p.step_speed; c++) _delay_us(1);
       PIND |= (1 << PD7); // toggle motor
