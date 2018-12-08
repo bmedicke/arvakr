@@ -143,13 +143,13 @@
         "class" : "Label",
         "attributes" : {
           "flex" : "L",
-          "font_size" : 12,
+          "name" : "",
           "frame" : "{{437, 368}, {150, 32}}",
           "uuid" : "9F60A431-8DF1-4B09-B39D-651D1467C4C7",
           "class" : "Label",
           "alignment" : "left",
           "text" : "autoscroll",
-          "name" : "",
+          "font_size" : 12,
           "font_name" : "<System>"
         },
         "selected" : false
@@ -161,13 +161,13 @@
         "frame" : "{{17, 55}, {126, 31}}",
         "class" : "Label",
         "attributes" : {
-          "name" : "label2",
+          "font_size" : 18,
           "frame" : "{{437, 368}, {150, 32}}",
           "uuid" : "BB4BB23A-1A1D-435F-A23F-1469A727C4FD",
           "class" : "Label",
           "alignment" : "left",
           "text" : "autostart",
-          "font_size" : 18,
+          "name" : "label2",
           "font_name" : "<System>"
         },
         "selected" : false
@@ -185,8 +185,8 @@
           "class" : "Label",
           "alignment" : "left",
           "text" : "status led",
-          "name" : "label2",
-          "font_size" : 18
+          "font_size" : 18,
+          "name" : "label2"
         },
         "selected" : false
       },
@@ -203,8 +203,8 @@
           "class" : "Label",
           "alignment" : "left",
           "text" : "uart debug",
-          "name" : "label2",
-          "font_size" : 18
+          "font_size" : 18,
+          "name" : "label2"
         },
         "selected" : false
       },
@@ -221,8 +221,8 @@
           "class" : "Label",
           "alignment" : "left",
           "text" : "global settings",
-          "name" : "global settings",
-          "font_size" : 16
+          "font_size" : 16,
+          "name" : "global settings"
         },
         "selected" : false
       },
@@ -281,13 +281,13 @@
         "frame" : "{{300.29996831281392, 6}, {126, 31}}",
         "class" : "Label",
         "attributes" : {
-          "font_size" : 16,
+          "name" : "profile",
           "frame" : "{{437, 368}, {150, 32}}",
           "uuid" : "BB4BB23A-1A1D-435F-A23F-1469A727C4FD",
           "class" : "Label",
           "alignment" : "left",
           "text" : "profile",
-          "name" : "profile",
+          "font_size" : 16,
           "font_name" : "<System-Bold>"
         },
         "selected" : false
@@ -305,8 +305,8 @@
           "class" : "Label",
           "alignment" : "left",
           "text" : "startup delay",
-          "font_size" : 18,
-          "name" : "label2"
+          "name" : "label2",
+          "font_size" : 18
         },
         "selected" : false
       },
@@ -341,13 +341,13 @@
         "frame" : "{{300.29996831281392, 55}, {68, 31}}",
         "class" : "Label",
         "attributes" : {
-          "name" : "label2",
+          "font_size" : 18,
           "frame" : "{{437, 368}, {150, 32}}",
           "uuid" : "BB4BB23A-1A1D-435F-A23F-1469A727C4FD",
           "class" : "Label",
           "alignment" : "left",
           "text" : "mode",
-          "font_size" : 18,
+          "name" : "label2",
           "font_name" : "<System>"
         },
         "selected" : false
@@ -381,9 +381,9 @@
           "uuid" : "67681268-7CFC-4D8D-88D5-4AB7F7F6F274",
           "class" : "Label",
           "alignment" : "left",
-          "text" : "cooldown",
-          "name" : "label1",
-          "font_size" : 18
+          "text" : "step speed",
+          "font_size" : 18,
+          "name" : "label1"
         },
         "selected" : false
       },
@@ -399,9 +399,9 @@
           "uuid" : "67681268-7CFC-4D8D-88D5-4AB7F7F6F274",
           "class" : "Label",
           "alignment" : "left",
-          "text" : "step delay",
-          "font_size" : 18,
-          "name" : "label1"
+          "text" : "vibration",
+          "name" : "label1",
+          "font_size" : 18
         },
         "selected" : false
       },
@@ -418,8 +418,8 @@
           "class" : "Label",
           "alignment" : "left",
           "text" : "direction",
-          "font_size" : 18,
-          "name" : "label1"
+          "name" : "label1",
+          "font_size" : 18
         },
         "selected" : false
       },
@@ -447,13 +447,13 @@
         "frame" : "{{300.29996831281392, 252}, {126, 32}}",
         "class" : "Label",
         "attributes" : {
-          "name" : "label1",
+          "font_size" : 18,
           "frame" : "{{437, 368}, {150, 32}}",
           "uuid" : "67681268-7CFC-4D8D-88D5-4AB7F7F6F274",
           "class" : "Label",
           "alignment" : "left",
-          "text" : "step count",
-          "font_size" : 18,
+          "text" : "post shutter",
+          "name" : "label1",
           "font_name" : "<System>"
         },
         "selected" : false
@@ -469,10 +469,10 @@
           "secure" : false,
           "frame" : "{{412, 368}, {200, 32}}",
           "custom_attributes" : "{\n\"keyboard_type\": ui.KEYBOARD_DECIMAL_PAD\n}",
-          "action" : "mcmd.cooldown",
+          "action" : "mcmd.step_speed",
           "alignment" : "left",
           "autocorrection_type" : "no",
-          "text" : "0",
+          "text" : "1",
           "font_name" : "<System>",
           "spellchecking_type" : "no",
           "class" : "TextField",
@@ -492,10 +492,10 @@
           "secure" : false,
           "frame" : "{{412, 368}, {200, 32}}",
           "custom_attributes" : "{\n\"keyboard_type\": ui.KEYBOARD_DECIMAL_PAD\n}",
-          "action" : "mcmd.step_delay",
+          "action" : "mcmd.vibration_duration",
           "alignment" : "left",
           "autocorrection_type" : "no",
-          "text" : "0",
+          "text" : "3",
           "font_name" : "<System>",
           "spellchecking_type" : "no",
           "class" : "TextField",
@@ -515,10 +515,10 @@
           "secure" : false,
           "frame" : "{{412, 368}, {200, 32}}",
           "custom_attributes" : "{\n\"keyboard_type\": ui.KEYBOARD_DECIMAL_PAD\n}",
-          "action" : "mcmd.step_count",
+          "action" : "mcmd.post_shutter_delay",
           "alignment" : "left",
           "autocorrection_type" : "no",
-          "text" : "0",
+          "text" : "1",
           "font_name" : "<System>",
           "spellchecking_type" : "no",
           "class" : "TextField",
@@ -540,8 +540,8 @@
           "class" : "Label",
           "alignment" : "left",
           "text" : "controls",
-          "font_size" : 16,
-          "name" : "profile"
+          "name" : "profile",
+          "font_size" : 16
         },
         "selected" : false
       },
@@ -585,7 +585,7 @@
           "name" : "button1",
           "font_size" : 15
         },
-        "selected" : true
+        "selected" : false
       },
       {
         "nodes" : [
@@ -633,11 +633,11 @@
     "frame" : "{{0, 0}, {1024, 768}}",
     "class" : "View",
     "attributes" : {
-      "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)",
+      "name" : "Alsvidr - Allgeschwind",
       "enabled" : true,
+      "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)",
       "tint_color" : "RGBA(0.000000,0.478000,1.000000,1.000000)",
       "border_color" : "RGBA(0.000000,0.000000,0.000000,1.000000)",
-      "name" : "Alsvidr - Allgeschwind",
       "flex" : ""
     },
     "selected" : false
