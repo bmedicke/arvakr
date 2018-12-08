@@ -1,4 +1,8 @@
+#include <avr/io.h>
 #include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
+#include <util/delay.h>
 
 #include "programming_mode.h"
 #include "settings.h"
@@ -7,9 +11,9 @@
 
 #define PROGRAMMING_MODE_WINDOW 10
 
-#define START_OF_TEXT ';' //TODO: use '\2'
-#define END_OF_TEXT   ';' //TODO: use '\3'
-#define SEPERATOR     '!' //TODO: find suitable control character.
+#define START_OF_TEXT ';'
+#define END_OF_TEXT   ';'
+#define SEPERATOR     "!"
 
 void block_for_programming_mode_window(volatile uint32_t* second) {
   debug_string("\n\r> opened programming mode window.");
@@ -30,13 +34,81 @@ void block_for_programming_mode_window(volatile uint32_t* second) {
 void _programming_mode() {
   debug_string("\n\r>> started programming\n\r");
 
+  uint8_t i = 0;
   uint8_t c = 0;
-  for (;;) {
-    uart_receive_nonblocking(&c);
-    uart_transmit(c);
-    if (c == END_OF_TEXT) break;
-    /* TODO: deserialize data and save to global settings/profile. */
+  char program_string[255] = {'\0'};
+
+  while(1) {
+    if(uart_receive_nonblocking(&c)) {
+      if (c == END_OF_TEXT) break;
+      program_string[i++] = c;
+    }
   }
 
-  debug_string("\n\r>> ended programming");
+  debug_string(program_string);
+
+  global_settings global = global_settings_get();
+
+  profile p;
+  profile_get(&p, global.active_profile);
+
+  char* token;
+
+  /* deserialize global settings: */
+
+  token = strtok(program_string, SEPERATOR);
+  if (token != NULL) global.version = strtol(token, NULL, 10);
+
+  token = strtok(NULL, SEPERATOR);
+  if (token != NULL) global.autostart = strtol(token, NULL, 10);
+
+  token = strtok(NULL, SEPERATOR);
+  if (token != NULL) global.status_led = strtol(token, NULL, 10);
+
+  token = strtok(NULL, SEPERATOR);
+  if (token != NULL) global.uart_debug = strtol(token, NULL, 10);
+
+  token = strtok(NULL, SEPERATOR);
+  if (token != NULL) global.active_profile = strtol(token, NULL, 10);
+
+  token = strtok(NULL, SEPERATOR);
+  if (token != NULL) global.authentication_token = strtol(token, NULL, 10);
+
+  global_settings_set(&global);
+
+  /* deserialize profile: */
+
+  token = strtok(NULL, SEPERATOR);
+  if (token != NULL) p.profile_version = strtol(token, NULL, 10);
+
+  token = strtok(NULL, SEPERATOR);
+  if (token != NULL) p.CRC = strtol(token, NULL, 10);
+
+  token = strtok(NULL, SEPERATOR);
+  if (token != NULL) p.drive_mode = strtol(token, NULL, 10);
+
+  token = strtok(NULL, SEPERATOR);
+  if (token != NULL) p.direction = strtol(token, NULL, 10);
+
+  token = strtok(NULL, SEPERATOR);
+  if (token != NULL) p.startup_delay = strtol(token, NULL, 10);
+
+  token = strtok(NULL, SEPERATOR);
+  if (token != NULL) p.step_speed = strtol(token, NULL, 10);
+
+  token = strtok(NULL, SEPERATOR);
+  if (token != NULL) p.vibrations_duration = strtol(token, NULL, 10);
+
+  token = strtok(NULL, SEPERATOR);
+  if (token != NULL) p.post_shutter_delay = strtol(token, NULL, 10);
+
+  p.relay_trigger_duration = 200;
+
+  profile_set(&p, global.active_profile);
+  debug_string("\n\r>> ended programming, resetting");
+
+  /* hardware reset by pulling RESET_ low (via resistor). */
+  _delay_ms(50);
+  DDRD |= (1 << PD4);
+  PORTD &= ~(0 << PD4);
 }

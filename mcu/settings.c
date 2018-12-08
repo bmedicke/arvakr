@@ -68,17 +68,16 @@ uint8_t profile_set_defaults(uint8_t id) {
   if (id >= NUMBER_OF_PROFILES) return 0;
 
   profile p;
-  //p.cooldown = 0;
   p.drive_mode = 0;
   p.profile_version = 2;
   p.CRC = 0;
-  //Step-Shoot-Step variables
+  // step-shoot-step variables
   p.direction = 0;
-  p.startup_delay = 0; //seconds
-  p.step_speed = 1; //mirco seconds
-  p.vibrations_duration = 3; //seconds
-  p.relay_trigger_duration = 200;//milliseconds
-  p.post_shutter_delay = 1; //seconds
+  p.startup_delay = 0; // seconds
+  p.step_speed = 1; // mirco seconds
+  p.vibrations_duration = 3; // seconds
+  p.relay_trigger_duration = 200; // milliseconds
+  p.post_shutter_delay = 1; // seconds
 
   uint16_t destination_address = PROFILE_START_ADDRESS + (id * PROFILE_SIZE);
   eeprom_update_block(&p, (void*) destination_address, sizeof(p));
@@ -87,7 +86,6 @@ uint8_t profile_set_defaults(uint8_t id) {
 
 /* TODO: update profile_send */
 void profile_send(uint8_t id) {
-  /*
   profile p;
   profile_get(&p, id);
   char s[11];
@@ -95,30 +93,27 @@ void profile_send(uint8_t id) {
   uart_send_string("\n\rprofile ");
   uart_transmit(id + '0');
 
+  uart_send_string("\n\r> profile_version: ");
+  uart_transmit(p.profile_version + '0');
+
   uart_send_string("\n\r> drive_mode: ");
   uart_transmit(p.drive_mode + '0');
-
-  uart_send_string("\n\r> step_count: ");
-  uart_transmit(p.step_count + '0');
-
-  uart_send_string("\n\r> cooldown: ");
-  uart_transmit(p.cooldown + '0');
-
-  uart_send_string("\n\r> step_delay: ");
-  uart_transmit(p.step_delay + '0');
 
   uart_send_string("\n\r> direction: ");
   uart_transmit(p.direction + '0');
 
-  uart_send_string("\n\r> dynamic_curve: ");
-  uart_transmit(p.dynamic_curve + '0');
-
-  uart_send_string("\n\r> profile_version: ");
-  uart_transmit(p.profile_version + '0');
-
   uart_send_string("\n\r> startup_delay: ");
   uint32_to_str(p.startup_delay, s);
   uart_send_string(s);
+
+  uart_send_string("\n\r> step_speed: ");
+  uart_transmit(p.step_speed + '0');
+
+  uart_send_string("\n\r> vibrations_duration: ");
+  uart_transmit(p.vibrations_duration + '0');
+
+  uart_send_string("\n\r> post_shutter_delay: ");
+  uart_transmit(p.post_shutter_delay + '0');
+
   uart_send_string("\n\r");
-  */
 }
