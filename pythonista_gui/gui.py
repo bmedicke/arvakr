@@ -11,11 +11,11 @@ view = None  # keep track of our view.
 
 VERSION = 1
 START = ';'
-END = ';'
-SEP = '!'
+END   = ';'
+SEP   = '!'
 
+class global_settings():
 
-class global_settings:
     def __init__(self):
         self.version = VERSION
         self.autostart = 1
@@ -25,7 +25,8 @@ class global_settings:
         self.authentication_token = 0
 
 
-class profile_settings:
+class profile_settings():
+
     def __init__(self):
         self.startup_delay = 0
         self.drive_mode = 0
@@ -37,14 +38,14 @@ class profile_settings:
         self.profile_version = VERSION
         self.CRC = 0
 
-
 # central role:
 class BLEDeviceManager(object):
+
     def __init__(self):
         self.peripheral = None
         self.characteristic = None
         self.autoscroll_enable = 1
-
+        
         self.global_settings = global_settings()
         self.profile = profile_settings()
 
@@ -75,49 +76,52 @@ class BLEDeviceManager(object):
             view['console_textview'].text += c.value.decode().replace('\r', '')
             if self.autoscroll_enable:
                 view['console_textview'].content_offset = (
-                    0,
-                    view['console_textview'].content_size[1]
-                    - view['console_textview'].height,
-                )
+                    0, view['console_textview'].content_size[1] -
+                    view['console_textview'].height)
 
     def console_clear(self, sender):
         view['console_textview'].text = ''
+    
+    def test(self, sender):
+        c = self.characteristic
+        payload = 'T'
+        self.peripheral.write_characteristic_value(c, payload, True)
+    
+    def info(self, sender):
+        c = self.characteristic
+        payload = 'i'
+        self.peripheral.write_characteristic_value(c, payload, True)
+
+    def trigger(self, sender):
+        c = self.characteristic
+        payload = 't'
+        self.peripheral.write_characteristic_value(c, payload, True)
+
+    def eeprom_reset(self, sender):
+        c = self.characteristic
+        payload = 'r'
+        self.peripheral.write_characteristic_value(c, payload, True)
 
     def upload(self, sender):
         c = self.characteristic
-
-        payload = (
-            str(self.global_settings.version)
-            + SEP
-            + str(int(self.global_settings.autostart))
-            + SEP
-            + str(int(self.global_settings.status_led))
-            + SEP
-            + str(int(self.global_settings.uart_debug))
-            + SEP
-            + str(self.global_settings.active_profile)
-            + SEP
-            + str(self.global_settings.authentication_token)
-            + SEP
-            + str(self.profile.startup_delay)
-            + SEP
-            + str(self.profile.drive_mode)
-            + SEP
-            + str(self.profile.step_count)
-            + SEP
-            + str(self.profile.cooldown)
-            + SEP
-            + str(self.profile.step_delay)
-            + SEP
-            + str(self.profile.direction)
-            + SEP
-            + str(self.profile.dynamic_curve)
-            + SEP
-            + str(self.profile.profile_version)
-            + SEP
-            + str(self.profile.CRC)
-        )
-
+        
+        payload = \
+        str(self.global_settings.version) + SEP + \
+        str(int(self.global_settings.autostart)) + SEP + \
+        str(int(self.global_settings.status_led)) + SEP + \
+        str(int(self.global_settings.uart_debug)) + SEP + \
+        str(self.global_settings.active_profile) + SEP + \
+        str(self.global_settings.authentication_token) + SEP + \
+        str(self.profile.startup_delay) + SEP + \
+        str(self.profile.drive_mode) + SEP + \
+        str(self.profile.step_count) + SEP + \
+        str(self.profile.cooldown) + SEP + \
+        str(self.profile.step_delay) + SEP + \
+        str(self.profile.direction) + SEP + \
+        str(self.profile.dynamic_curve) + SEP + \
+        str(self.profile.profile_version) + SEP + \
+        str(self.profile.CRC)
+            
         self.peripheral.write_characteristic_value(c, START, True)
         self.peripheral.write_characteristic_value(c, payload, True)
         self.peripheral.write_characteristic_value(c, END, True)
@@ -129,37 +133,33 @@ class BLEDeviceManager(object):
     def ble_disconnect(self, sender):
         cb.reset()
 
-    def toggle_led(self, sender):
-        c = self.characteristic
-        self.peripheral.write_characteristic_value(c, 'l', True)
-
     def close(self):
         cb.reset()
-
+        
     def autoscroll(self, sender):
         self.autoscroll_enable = sender.value
-
+        
     def autostart(self, sender):
         self.global_settings.autostart = sender.value
 
     def status_led(self, sender):
         self.global_settings.status_led = sender.value
-
+    
     def uart_debug(self, sender):
         self.global_settings.uart_debug = sender.value
-
+        
     def mode(self, sender):
         self.profile.drive_mode = sender.selected_index
-
+        
     def direction(self, sender):
         self.profile.direction = sender.selected_index
-
+        
     def cooldown(self, sender):
         self.profile.cooldown = sender.text
-
+        
     def step_delay(self, sender):
         self.profile.step_delay = sender.text
-
+        
     def startup_delay(self, sender):
         self.profile.startup_delay = sender.text
 
@@ -191,3 +191,4 @@ else:
 
 view.wait_modal()  # block 'till view closes.
 cb.reset()  # reset the ble connection.
+

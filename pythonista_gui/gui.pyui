@@ -31,7 +31,7 @@
         "nodes" : [
 
         ],
-        "frame" : "{{902, 122}, {110, 29}}",
+        "frame" : "{{902, 207}, {110, 29}}",
         "class" : "Button",
         "attributes" : {
           "uuid" : "AC6021C4-6D19-416F-84A9-79404F1A2AC4",
@@ -116,7 +116,7 @@
         "nodes" : [
 
         ],
-        "frame" : "{{902, 175}, {110, 29}}",
+        "frame" : "{{902, 244}, {110, 29}}",
         "class" : "Button",
         "attributes" : {
           "uuid" : "AC6021C4-6D19-416F-84A9-79404F1A2AC4",
@@ -132,29 +132,6 @@
           "class" : "Button",
           "name" : "",
           "flex" : "L"
-        },
-        "selected" : false
-      },
-      {
-        "nodes" : [
-
-        ],
-        "frame" : "{{902, 85}, {110, 29}}",
-        "class" : "Button",
-        "attributes" : {
-          "uuid" : "AC6021C4-6D19-416F-84A9-79404F1A2AC4",
-          "flex" : "L",
-          "corner_radius" : 5,
-          "frame" : "{{472, 368}, {80, 32}}",
-          "border_color" : "RGBA(0.761792,0.761792,0.761792,1.000000)",
-          "border_width" : 1,
-          "tint_color" : "RGBA(0.000000,-0.000000,-0.000000,1.000000)",
-          "title" : "toggle led",
-          "action" : "mcmd.toggle_led",
-          "font_bold" : false,
-          "class" : "Button",
-          "name" : "",
-          "font_size" : 15
         },
         "selected" : false
       },
@@ -554,7 +531,7 @@
         "nodes" : [
 
         ],
-        "frame" : "{{902, 6}, {126, 31}}",
+        "frame" : "{{902, 6}, {122, 31}}",
         "class" : "Label",
         "attributes" : {
           "font_name" : "<System-Bold>",
@@ -567,15 +544,99 @@
           "name" : "profile"
         },
         "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{902, 85}, {110, 32}}",
+        "class" : "Button",
+        "attributes" : {
+          "border_width" : 1,
+          "action" : "mcmd.trigger",
+          "frame" : "{{472, 368}, {80, 32}}",
+          "tint_color" : "RGBA(0.103459,0.332547,-0.011085,1.000000)",
+          "title" : "trigger",
+          "uuid" : "BC2BAE8B-FC0D-4C79-BC48-B3B28F99C4C1",
+          "corner_radius" : 5,
+          "font_bold" : false,
+          "class" : "Button",
+          "name" : "button1",
+          "font_size" : 15
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{902, 125}, {110, 32}}",
+        "class" : "Button",
+        "attributes" : {
+          "border_width" : 1,
+          "action" : "mcmd.info",
+          "frame" : "{{472, 368}, {80, 32}}",
+          "tint_color" : "RGBA(0.103459,0.332547,-0.011085,1.000000)",
+          "title" : "info",
+          "uuid" : "BC2BAE8B-FC0D-4C79-BC48-B3B28F99C4C1",
+          "corner_radius" : 5,
+          "font_bold" : false,
+          "class" : "Button",
+          "name" : "button1",
+          "font_size" : 15
+        },
+        "selected" : true
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{902, 281}, {110, 32}}",
+        "class" : "Button",
+        "attributes" : {
+          "border_width" : 1,
+          "action" : "mcmd.eeprom_reset",
+          "frame" : "{{472, 368}, {80, 32}}",
+          "tint_color" : "RGBA(0.103459,0.332547,-0.011085,1.000000)",
+          "title" : "init eeprom",
+          "uuid" : "BC2BAE8B-FC0D-4C79-BC48-B3B28F99C4C1",
+          "corner_radius" : 5,
+          "font_bold" : false,
+          "class" : "Button",
+          "name" : "button1",
+          "font_size" : 15
+        },
+        "selected" : false
+      },
+      {
+        "nodes" : [
+
+        ],
+        "frame" : "{{902, 165}, {110, 32}}",
+        "class" : "Button",
+        "attributes" : {
+          "border_width" : 1,
+          "action" : "mcmd.test",
+          "frame" : "{{472, 368}, {80, 32}}",
+          "tint_color" : "RGBA(0.103459,0.332547,-0.011085,1.000000)",
+          "title" : "test",
+          "uuid" : "BC2BAE8B-FC0D-4C79-BC48-B3B28F99C4C1",
+          "corner_radius" : 5,
+          "font_bold" : false,
+          "class" : "Button",
+          "name" : "button1",
+          "font_size" : 15
+        },
+        "selected" : false
       }
     ],
     "frame" : "{{0, 0}, {1024, 768}}",
     "class" : "View",
     "attributes" : {
-      "tint_color" : "RGBA(0.000000,0.478000,1.000000,1.000000)",
-      "enabled" : true,
-      "border_color" : "RGBA(0.000000,0.000000,0.000000,1.000000)",
       "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)",
+      "enabled" : true,
+      "tint_color" : "RGBA(0.000000,0.478000,1.000000,1.000000)",
+      "border_color" : "RGBA(0.000000,0.000000,0.000000,1.000000)",
       "name" : "Alsvidr - Allgeschwind",
       "flex" : ""
     },
