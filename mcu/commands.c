@@ -1,5 +1,5 @@
-#include <stdint.h>
 #include <avr/io.h>
+#include <stdint.h>
 #include <util/delay.h>
 
 #include "settings.h"
@@ -27,19 +27,6 @@ void handle_commands() {
   uint8_t command;
   if (uart_receive_nonblocking(&command)) {
     switch (command) {
-      case 'l':
-        DDRB |= (1 << PB5);
-        PORTB ^= (1 << PB5);
-        break;
-      case 'e': {
-        DDRD |= (1 << PD2); // input.
-        PORTD |= (1 << PD2); // enable pullup.
-        while (1) {
-          if (PIND & (1 << PD2)) uart_send_string("\n\rzu");
-          else uart_send_string("\n\roffen");
-          _delay_ms(300);
-        }
-      }
       case 'R':
         /* hardware reset by pulling RESET_ low (via resistor). */
         DDRD |= (1 << PD4);
@@ -49,6 +36,7 @@ void handle_commands() {
         global_settings_set_defaults();
         uint8_t i = 0;
         for (; i < 20; i++) profile_set_defaults(i);
+        uart_send_string("\n\rwrote default values to eeprom\n\r");
         break;
       case 't': {
         DDRC |= (1 << PC1);
@@ -61,37 +49,6 @@ void handle_commands() {
         global_settings_send();
         profile_send(global_settings_get().active_profile);
         break;
-      case 'h': {
-        while (1) {
-          char s[255];
-          uint16_to_str(count++, s);
-          uart_send_string(s);
-          uart_send_string("\n\r");
-
-          // 1. step:
-          for (int i = 0; i < 50; i++) {
-            _delay_us(1);
-            PIND |= (1 << PD7); // toggle motor.
-            _delay_us(1);
-          }
-          PORTD &= ~(1 << PD7);
-
-          // 2. wait for vibrations to settle:
-          _delay_ms(3800);
-
-          // 3. trigger camera:
-          {
-            DDRC |= (1 << PC1);
-            PORTC |= (1 << PC1);
-            _delay_ms(200);
-            PORTC &= ~(1 << PC1);
-          }
-
-          // 4. wait for camera:
-          _delay_ms(5000);
-        }
-        break;
-      }
       case '0':
         profile_send(0);
         break;

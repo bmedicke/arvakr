@@ -1,5 +1,6 @@
 #include <avr/interrupt.h>
 
+#include "adc.h"
 #include "commands.h"
 #include "external_eeprom.h"
 #include "modes.h"
@@ -25,14 +26,11 @@ void stepper_setup() {
   PORTD &= ~(1 << PD5); /* enable driver by pulling /enable low. */
 }
 
-
-// TODO: ADC init.
-// TODO: stepper setup.
-
 int main() {
   uart_init(UART_BAUD);
   external_eeprom_init(I2C_SCL);
   timer_init();
+  adc_init();
   stepper_setup();
   sei();
 
