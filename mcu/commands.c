@@ -28,9 +28,7 @@ void handle_commands() {
   if (uart_receive_nonblocking(&command)) {
     switch (command) {
       case 'R':
-        /* hardware reset by pulling RESET_ low (via resistor). */
-        DDRD |= (1 << PD4);
-        PORTD &= ~(0 << PD4);
+        hardware_reset();
         break;
       case 'r':
         global_settings_set_defaults();

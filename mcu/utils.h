@@ -13,4 +13,6 @@ void uint32_to_str(uint32_t val, char* target); /* string should be 11 char */
 void debug_string(char* str);
 void error_string(char* str);
 
+void hardware_reset();
+
 #endif /* _UTILS_H_ */

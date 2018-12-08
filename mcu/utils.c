@@ -1,3 +1,6 @@
+#include <avr/io.h>
+#include <util/delay.h>
+
 #include "settings.h"
 #include "uart.h"
 #include "utils.h"
@@ -37,4 +40,11 @@ void debug_string(char* str) {
 void error_string(char* str) {
   /* TODO: flash status led red */
   uart_send_string(str);
+}
+
+void hardware_reset() {
+  /* hardware reset by pulling RESET_ low (via resistor). */
+  _delay_ms(100);
+  DDRD |= (1 << PD4);
+  PORTD &= ~(0 << PD4);
 }

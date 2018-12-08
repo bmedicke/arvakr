@@ -108,7 +108,5 @@ void _programming_mode() {
   debug_string("\n\r>> ended programming, resetting");
 
   /* hardware reset by pulling RESET_ low (via resistor). */
-  _delay_ms(50);
-  DDRD |= (1 << PD4);
-  PORTD &= ~(0 << PD4);
+  hardware_reset();
 }
