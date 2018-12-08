@@ -1,7 +1,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
-#include "motor.h"
 
+#include "motor.h"
 
 #define stepPin PD7            //Define Step pin
 #define dirPin PD6             //Define Direction pin
@@ -10,15 +10,6 @@
 #define MS2 PB1              //Microselect 2
 #define MS3 PB2              //Microselect 3
 
-
-void init() {
-  DDRD |= (1 << PD5) | (1 << PD6) | (1 <<
-                                     PD7); // Configure PORTD5, PORTD6, PORTD7 as output
-  DDRB |= (1 << PB0) | (1 << PB1) | (1 << PB2);
-  PORTD &= ~(1 << PD5);               // Enable driver
-  DDRD &= ~(1 << PD2) | (1 << PD3);
-  PORTD |= (1 << PD2) | (1 << PD3);
-}
 
 // MS deaktiviert
 void fullstep() {
@@ -101,21 +92,4 @@ void microstep() {
     _delay_ms(1000);
   }
 }
-
-
-/* int main(void) { */
-/*   init(); */
-
-/*   while (1) { */
-
-/* //joystick_rightFullspeed(); */
-/* //joystick_rightNormalspeed(); */
-/* //joystick_rightLowspeed(); */
-
-/* //joystick_leftFullspeed(); */
-/* //joystick_leftNormalspeed(); */
-/* joystick_leftLowspeed(); */
-
-/*   } */
-/* } */
 

@@ -1,19 +1,17 @@
-#include <stdint.h>
 #include <avr/io.h>
+#include <stdint.h>
 #include <util/delay.h>
 
+#include "adc.h"
 #include "modes.h"
+#include "motor.h"
 #include "settings.h"
 #include "uart.h"
 #include "utils.h"
-#include "adc.h"
-#include "motor.h"
-
 
 void _mode_continous(uint32_t second) {
   local_persist uint32_t last_second = 0;
   adc_init();
-
 
   DDRD |= (1 << PD6); //output
   DDRC |= (1 << PC2); // input.

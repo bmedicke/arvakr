@@ -1,7 +1,6 @@
 #ifndef _MOTOR_H_
 #define _MOTOR_H_
 
-void init();
 void fullstep();
 void halfstep();
 void quarterstep();
