@@ -21,9 +21,21 @@ ISR(TIMER1_OVF_vect) {
   second++;
 }
 
-void stepper_setup() {
+void slider_init() {
+  /* stepper: */
   DDRD |= (1 << PD5) | (1 << PD6) | (1 << PD7);
   PORTD &= ~(1 << PD5); /* enable driver by pulling /enable low. */
+
+  /* joystick button: */
+  DDRC |= (1 << PC2); // input.
+  PORTC |= (1 << PC2); // enable pullup.
+
+  /* endstops: */
+  DDRD &= ~((1 << PD2) | (1 << PD3)); // input. irgendwo falsch
+  PORTD |= (1 << PD2) | (1 << PD3); // enable pullup.
+
+  /* camera trigger: */
+  DDRC |= (1 << PC1);
 }
 
 int main() {
@@ -31,7 +43,7 @@ int main() {
   external_eeprom_init(I2C_SCL);
   timer_init();
   adc_init();
-  stepper_setup();
+  slider_init();
   sei();
 
   global_settings global = global_settings_get();

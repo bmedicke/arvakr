@@ -11,14 +11,7 @@
 
 void _mode_continous(uint32_t second) {
   local_persist uint32_t last_second = 0;
-  adc_init();
 
-  DDRD |= (1 << PD6); //output
-  DDRC |= (1 << PC2); // input.
-  PORTC |= (1 << PC2); // enable pullup.
-//Endstops
-  DDRD &= ~((1 << PD2) | (1 << PD3)); // input. irgendwo falsch
-  PORTD |= (1 << PD2) | (1 << PD3); // enable pullup.
   /* entered once per second: */
   if (last_second != second) {
     char seconds[11];
@@ -30,7 +23,6 @@ void _mode_continous(uint32_t second) {
   /* TODO: Joystick fahren */
 //while (!deadzone)
   if (!(PINC & (1 << PC2))) {
-    DDRC |= (1 << PC1);
     PORTC |= (1 << PC1);
     _delay_ms(200);
     PORTC &= ~(1 << PC1);
@@ -78,23 +70,7 @@ void _mode_continous(uint32_t second) {
 }
 
 void _mode_step_shoot_step(uint32_t second) {
-  local_persist uint32_t last_second = 0;
-//eeprom einlesen
-  /* entered once per second: */
-  DDRD |= (1 << PD6); //output
-
-  //Endstops
-  DDRD &= ~((1 << PD2) | (1 << PD3)); // input. irgendwo falsch
-  PORTD |= (1 << PD2) | (1 << PD3); // enable pullup.
-
-
-
-  if (last_second != second) {
-  }
   global_settings global = global_settings_get();
-
-
-
   profile p;
   //for SSS mode
   profile_get(&p, global.active_profile);
@@ -140,7 +116,6 @@ void _mode_step_shoot_step(uint32_t second) {
 
     // 3. trigger camera:
     {
-      DDRC |= (1 << PC1);
       PORTC |= (1 << PC1);
       for (int c = 0; c <= p.relay_trigger_duration; c++) _delay_ms(1); //hardcoded
       PORTC &= ~(1 << PC1);
@@ -150,7 +125,6 @@ void _mode_step_shoot_step(uint32_t second) {
     for (int c = 0; c <= p.post_shutter_delay; c++) _delay_ms(1000); //todo
 
   }
-  last_second = second;
 }
 
 void _mode_bulb(uint32_t second) {
