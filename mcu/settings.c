@@ -19,7 +19,7 @@ void global_settings_set(global_settings* g) {
 
 void global_settings_set_defaults() {
   global_settings g;
-  g.version = 0;
+  g.version = 2;
   g.authentication_token = -1;
   g.status_led = 1;
   g.autostart = 1;
@@ -70,7 +70,7 @@ uint8_t profile_set_defaults(uint8_t id) {
   profile p;
   //p.cooldown = 0;
   p.drive_mode = 0;
-  p.profile_version = 0;
+  p.profile_version = 2;
   p.CRC = 0;
   //Step-Shoot-Step variables
   p.direction = 0;
@@ -78,7 +78,7 @@ uint8_t profile_set_defaults(uint8_t id) {
   p.step_speed = 1; //mirco seconds
   p.vibrations_duration = 3; //seconds
   p.relay_trigger_duration = 200;//milliseconds
-  p.shutter_delay = 1; //seconds
+  p.post_shutter_delay = 1; //seconds
 
   uint16_t destination_address = PROFILE_START_ADDRESS + (id * PROFILE_SIZE);
   eeprom_update_block(&p, (void*) destination_address, sizeof(p));
