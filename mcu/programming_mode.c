@@ -38,8 +38,8 @@ void _programming_mode() {
   uint8_t c = 0;
   char program_string[255] = {'\0'};
 
-  while(1) {
-    if(uart_receive_nonblocking(&c)) {
+  while (1) {
+    if (uart_receive_nonblocking(&c)) {
       if (c == END_OF_TEXT) break;
       program_string[i++] = c;
     }

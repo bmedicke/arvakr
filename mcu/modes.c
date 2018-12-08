@@ -86,8 +86,8 @@ void _mode_step_shoot_step(uint32_t second) {
   DDRD |= (1 << PD6); //output
 
   //Endstops
-    DDRD &= ~((1 << PD2) | (1 << PD3)); // input. irgendwo falsch
-    PORTD |= (1 << PD2) | (1 << PD3); // enable pullup.
+  DDRD &= ~((1 << PD2) | (1 << PD3)); // input. irgendwo falsch
+  PORTD |= (1 << PD2) | (1 << PD3); // enable pullup.
 
 
 
@@ -103,14 +103,14 @@ void _mode_step_shoot_step(uint32_t second) {
 
 //TODO WIESO MUSS DAS INVERTIERT SEIN, kann auch da sein
 
-  if(p.direction == 0){
+  if (p.direction == 0) {
     PORTD &= ~(1 << PD6);
-  }else{
-      PORTD |= (1 << PD6);
+  } else {
+    PORTD |= (1 << PD6);
   }
 
 
-  for (int c = 0; c<=p.startup_delay; c++) _delay_ms(1000);
+  for (int c = 0; c <= p.startup_delay; c++) _delay_ms(1000);
 
   while (1) {
     //TODO
@@ -130,25 +130,26 @@ void _mode_step_shoot_step(uint32_t second) {
     }
 
     for (int i = 0; i < 50; i++) {
-      for (int c = 0; c<=p.step_speed; c++) _delay_us(1);
+      for (int c = 0; c <= p.step_speed; c++) _delay_us(1);
       PIND |= (1 << PD7); // toggle motor
-      for (int c = 0; c<=p.step_speed; c++) _delay_us(1);
+      for (int c = 0; c <= p.step_speed; c++) _delay_us(1);
     }
     PORTD &= ~(1 << PD7);
 
     // 2. wait for vibrations to settle:
-    for (int c = 0; c<=p.vibrations_duration; c++) _delay_ms(1000);//todo cooldown
+    for (int c = 0; c <= p.vibrations_duration;
+         c++) _delay_ms(1000); //todo cooldown
 
     // 3. trigger camera:
     {
       DDRC |= (1 << PC1);
       PORTC |= (1 << PC1);
-      for (int c = 0; c<=p.relay_trigger_duration; c++) _delay_ms(1);//hardcoded
+      for (int c = 0; c <= p.relay_trigger_duration; c++) _delay_ms(1); //hardcoded
       PORTC &= ~(1 << PC1);
     }
 
     // 4. wait for camera:
-    for (int c = 0; c<=p.post_shutter_delay; c++) _delay_ms(1000);//todo
+    for (int c = 0; c <= p.post_shutter_delay; c++) _delay_ms(1000); //todo
 
   }
   last_second = second;
