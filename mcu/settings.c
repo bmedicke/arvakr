@@ -13,7 +13,7 @@ global_settings global_settings_get() {
 }
 
 void global_settings_set(global_settings* g) {
-  eeprom_update_block(&g, GLOBAL_SETTINGS_START_ADDRESS,
+  eeprom_update_block(g, GLOBAL_SETTINGS_START_ADDRESS,
                       sizeof(global_settings));
 }
 
