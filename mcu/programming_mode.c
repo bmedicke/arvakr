@@ -9,6 +9,7 @@
 
 #define START_OF_TEXT ';' //TODO: use '\2'
 #define END_OF_TEXT   ';' //TODO: use '\3'
+#define SEPERATOR     '!' //TODO: find suitable control character.
 
 void block_for_programming_mode_window(volatile uint32_t* second) {
   debug_string("\n\r> opened programming mode window.");
