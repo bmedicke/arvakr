@@ -148,7 +148,7 @@ void _mode_step_shoot_step(uint32_t second) {
     }
 
     // 4. wait for camera:
-    for (int c = 0; c<=p.shutter_delay; c++) _delay_ms(1000);//todo
+    for (int c = 0; c<=p.post_shutter_delay; c++) _delay_ms(1000);//todo
 
   }
   last_second = second;
