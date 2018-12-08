@@ -40,21 +40,21 @@ void _mode_continous(uint32_t second) {
   while (1) {
 // while (!(joystickX >= 440 && joystickX <= 584)){
     uint16_t joystickX = adc_read(3);
-    uint8_t left_endstop_activ, right_endstop_activ;
+    uint8_t left_endstop_active, right_endstop_active;
     if (PIND & (1 << PD3)) { //left
-      left_endstop_activ = 1; //pressed
+      left_endstop_active = 1; //pressed
     } else {
-      left_endstop_activ = 0; //not pressed
+      left_endstop_active = 0; //not pressed
     }
     if (PIND & (1 << PD2)) { //right
-      right_endstop_activ = 1;//pressed
+      right_endstop_active = 1;//pressed
     } else {
-      right_endstop_activ = 0;//not pressed
+      right_endstop_active = 0;//not pressed
     }
     if (joystickX >= 500 && joystickX <= 524) {
       break;
     }
-    if (left_endstop_activ) {
+    if (left_endstop_active) {
       if (joystickX >= 0 && joystickX <= 3) { //left fullspeed
         joystick_leftFullspeed();
       } else if (joystickX >= 4 && joystickX <= 219) { //left normal speed
@@ -63,7 +63,7 @@ void _mode_continous(uint32_t second) {
         joystick_leftLowspeed();
       }
     }
-    if (right_endstop_activ) {
+    if (right_endstop_active) {
       if (joystickX >= 525 && joystickX <= 804) { //right low speed
         joystick_rightLowspeed();
       } else if (joystickX >= 805 && joystickX <= 1019) { //right normal speed
@@ -112,11 +112,7 @@ void _mode_step_shoot_step(uint32_t second) {
 
   for (int c = 0; c<=p.startup_delay; c++) _delay_ms(1000);
 
-  while (1) {
-    //TODO
-    //von eeprom lesen?
-    //notlösung: abfragen ob notstop erreicht wurde !!!! vor schritt 1
-    //variabel machen
+
 
 
 //TODO WIESO MUSS DAS INVERTIERT SEIN!!!!!!
@@ -130,9 +126,6 @@ void _mode_step_shoot_step(uint32_t second) {
     }
 
       //_delay_ms(300);
-
-
-
     for (int i = 0; i < 50; i++) {
       for (int c = 0; c<=p.step_speed; c++) _delay_us(1);
       PIND |= (1 << PD7); // toggle motor
@@ -154,7 +147,7 @@ void _mode_step_shoot_step(uint32_t second) {
     // 4. wait for camera:
     for (int c = 0; c<=p.shutter_delay; c++) _delay_ms(1000);//todo
 
-  }
+
   last_second = second;
 }
 
@@ -183,4 +176,3 @@ void handle_mode(uint8_t mode, uint32_t second) {
       _mode_continous(second);
   }
 }
-
