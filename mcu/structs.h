@@ -46,6 +46,8 @@ typedef struct {
   uint8_t vibrations_duration;
   uint8_t shutter_delay;
   uint8_t relay_trigger_duration;
+  //mircostep
+  uint8_t mircostep_enabled;
 } profile;
 
 #endif /* _STRUCTS_H_ */

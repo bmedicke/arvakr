@@ -79,6 +79,8 @@ uint8_t profile_set_defaults(uint8_t id) {
   p.vibrations_duration = 3; //seconds
   p.relay_trigger_duration = 200;//milliseconds
   p.shutter_delay = 1; //seconds
+  //mircostep
+  p.mircostep_enabled = 0;
 
   uint16_t destination_address = PROFILE_START_ADDRESS + (id * PROFILE_SIZE);
   eeprom_update_block(&p, (void*) destination_address, sizeof(p));
