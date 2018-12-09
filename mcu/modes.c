@@ -77,6 +77,11 @@ void _mode_continous(uint32_t second) {
 void _mode_step_shoot_step(uint32_t second) {
   local_persist uint8_t first_run = 1;
 
+  char seconds[11];
+  uint32_to_str(second, seconds);
+  debug_string("\n\r");
+  debug_string(seconds);
+
   profile p;
   global_settings global = global_settings_get();
   profile_get(&p, global.active_profile);
