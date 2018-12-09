@@ -35,21 +35,8 @@ void _mode_continous(uint32_t second) {
       break;
     }
 
-    uint8_t endstop_left_active, endstop_right_active;
-
-    if (PIND & (1 << PD3)) { // left
-      endstop_left_active = 1; // pressed
-    } else {
-      endstop_left_active = 0; // not pressed
-    }
-
-    if (PIND & (1 << PD2)) { // right
-      endstop_right_active = 1; // pressed
-    } else {
-      endstop_right_active = 0; // not pressed
-    }
-
-    if (endstop_left_active) {
+    /* left endstop */
+    if (PIND & (1 << PD3)) {
       if (joystickX >= 0 && joystickX <= 3) { // left fullspeed
         joystick_leftFullspeed();
       } else if (joystickX >= 4 && joystickX <= 219) { // left normal speed
@@ -59,7 +46,8 @@ void _mode_continous(uint32_t second) {
       }
     }
 
-    if (endstop_right_active) {
+    /* right endstop */
+    if (PIND & (1 << PD2)) {
       if (joystickX >= 525 && joystickX <= 804) { // right low speed
         joystick_rightLowspeed();
       } else if (joystickX >= 805 && joystickX <= 1019) { // right normal speed
