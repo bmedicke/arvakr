@@ -91,10 +91,10 @@ void _mode_step_shoot_step(uint32_t second) {
   /* reverse direction when endstop hit: */
   if (!(PIND & (1 << PD3))) { // left
     PORTD &= ~(1 << PD6);
-    debug_string("left endstop hit\n\r");
+    debug_string("\n\rleft endstop hit");
   } else if (!(PIND & (1 << PD2))) { // right
     PORTD |= (1 << PD6);
-    debug_string("right endstop hit\n\r");
+    debug_string("\n\rright endstop hit");
   }
 
   // 1. step:
