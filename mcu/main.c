@@ -46,6 +46,8 @@ int main() {
   slider_init();
   sei();
 
+  block_for_programming_mode_window(&second);
+
   global_settings global = global_settings_get();
 
   profile p;
@@ -58,8 +60,6 @@ int main() {
     // TODO: check if eeprom online!
     external_eeprom_dump();
   }
-
-  block_for_programming_mode_window(&second);
 
   for (;;) {
     handle_commands();
