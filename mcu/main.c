@@ -54,13 +54,6 @@ int main() {
   if (!profile_get(&p, global.active_profile))
     error_string("profile id out of range!");
 
-  if (global.uart_debug) {
-    global_settings_send();
-    profile_send(global.active_profile);
-    // TODO: check if eeprom online!
-    external_eeprom_dump();
-  }
-
   for (;;) {
     handle_commands();
     handle_mode(p.drive_mode, second);
