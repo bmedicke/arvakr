@@ -97,37 +97,37 @@ void _mode_step_shoot_step(uint32_t second) {
     }
 
     /* delay startup: */
-    for (int c = 0; c <= p.startup_delay; c++) _delay_ms(1000);
+    for (int c = 0; c < p.startup_delay; c++) _delay_ms(1000);
   }
 
   /* reverse direction when endstop hit: */
   if (!(PIND & (1 << PD3))) { // left
     PORTD &= ~(1 << PD6);
-    uart_send_string("left endstop hit\n\r");
+    debug_string("left endstop hit\n\r");
   } else if (!(PIND & (1 << PD2))) { // right
     PORTD |= (1 << PD6);
-    uart_send_string("right endstop hit\n\r");
+    debug_string("right endstop hit\n\r");
   }
 
   // 1. step:
   for (int i = 0; i < 50; i++) {
-    for (int c = 0; c <= p.step_speed; c++) _delay_us(1);
+    for (int c = 0; c < p.step_speed; c++) _delay_us(1);
     PIND |= (1 << PD7); // toggle motor
-    for (int c = 0; c <= p.step_speed; c++) _delay_us(1);
+    for (int c = 0; c < p.step_speed; c++) _delay_us(1);
   }
   PORTD &= ~(1 << PD7);
 
   // 2. wait for vibrations to settle:
-  for (int c = 0; c <= p.vibrations_duration;
+  for (int c = 0; c < p.vibrations_duration;
        c++) _delay_ms(1000);
 
   // 3. trigger camera:
   PORTC |= (1 << PC1);
-  for (int c = 0; c <= p.relay_trigger_duration; c++) _delay_ms(1);
+  for (int c = 0; c < p.relay_trigger_duration; c++) _delay_ms(1);
   PORTC &= ~(1 << PC1);
 
   // 4. wait for camera:
-  for (int c = 0; c <= p.post_shutter_delay; c++) _delay_ms(1000);
+  for (int c = 0; c < p.post_shutter_delay; c++) _delay_ms(1000);
 }
 
 void _mode_bulb(uint32_t second) {
