@@ -44,7 +44,8 @@ void error_string(char* str) {
 
 void hardware_reset() {
   /* hardware reset by pulling RESET_ low (via resistor). */
-  _delay_ms(500);
+  debug_string("\n\rresetting\n\r");
+  _delay_ms(100);
   DDRD |= (1 << PD4);
   PORTD &= ~(0 << PD4);
 }
