@@ -30,7 +30,12 @@ void _mode_continous(uint32_t second) {
   /* handle joystick movement: */
   while (1) {
     uint16_t joystickX = adc_read(3);
-    uint8_t endstop_left_active, right_endstop_activ;
+
+    if (joystickX >= 500 && joystickX <= 524) {
+      break;
+    }
+
+    uint8_t endstop_left_active, endstop_right_active;
 
     if (PIND & (1 << PD3)) { // left
       endstop_left_active = 1; // pressed
@@ -42,10 +47,6 @@ void _mode_continous(uint32_t second) {
       endstop_right_active = 1; // pressed
     } else {
       endstop_right_active = 0; // not pressed
-    }
-
-    if (joystickX >= 500 && joystickX <= 524) {
-      break;
     }
 
     if (endstop_left_active) {
