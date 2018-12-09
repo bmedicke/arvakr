@@ -9,7 +9,7 @@
 #include "uart.h"
 #include "utils.h"
 
-#define PROGRAMMING_MODE_WINDOW 10
+#define PROGRAMMING_MODE_WINDOW 3
 
 #define START_OF_TEXT ';'
 #define END_OF_TEXT   ';'
