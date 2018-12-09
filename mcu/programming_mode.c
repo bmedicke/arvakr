@@ -105,8 +105,5 @@ void _programming_mode() {
   p.relay_trigger_duration = 200;
 
   profile_set(&p, global.active_profile);
-  debug_string("\n\r>> ended programming, resetting");
-
-  /* hardware reset by pulling RESET_ low (via resistor). */
-  hardware_reset();
+  debug_string("\n\r>> ended programming");
 }
