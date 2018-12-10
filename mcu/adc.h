@@ -5,5 +5,5 @@ void adc_init();
 uint16_t adc_read(uint8_t channel);
 void to_str(uint16_t val, char* target);
 
-#endif
+#endif /* ADC_H */
 
