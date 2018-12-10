@@ -102,6 +102,9 @@ void _programming_mode() {
   token = strtok(NULL, SEPERATOR);
   if (token != NULL) p.post_shutter_delay = strtol(token, NULL, 10);
 
+  token = strtok(NULL, SEPERATOR);
+  if (token != NULL) p.microstep_enabled = strtol(token, NULL, 10);
+
   p.relay_trigger_duration = 200;
 
   profile_set(&p, global.active_profile);

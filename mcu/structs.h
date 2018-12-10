@@ -34,7 +34,8 @@ typedef struct {
   uint8_t step_speed; // 12
   uint8_t vibrations_duration; // 13
   uint8_t post_shutter_delay; // 14
-  uint8_t relay_trigger_duration; // 15
+  uint8_t relay_trigger_duration; // -
+  uint8_t microstep_enabled; // 15
 } profile;
 
 #endif /* _STRUCTS_H_ */
