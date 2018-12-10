@@ -77,6 +77,12 @@ void _mode_step_shoot_step(uint32_t second) {
   if (first_run) {
     first_run = 0;
 
+    if(p.microstep_enabled){
+      halfstep();
+    }else{
+      fullstep();
+    }
+
     /* set direction according to active profile: */
     if (p.direction == 0) {
       PORTD &= ~(1 << PD6);

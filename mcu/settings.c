@@ -72,12 +72,13 @@ uint8_t profile_set_defaults(uint8_t id) {
   p.profile_version = 2;
   p.CRC = 0;
   // step-shoot-step variables
-  p.direction = 0;
+  p.direction = 0; 
   p.startup_delay = 0; // seconds
   p.step_speed = 1; // mirco seconds
   p.vibrations_duration = 3; // seconds
   p.relay_trigger_duration = 200; // milliseconds
   p.post_shutter_delay = 1; // seconds
+  p.microstep_enabled = 0;
 
   uint16_t destination_address = PROFILE_START_ADDRESS + (id * PROFILE_SIZE);
   eeprom_update_block(&p, (void*) destination_address, sizeof(p));
@@ -113,6 +114,9 @@ void profile_send(uint8_t id) {
 
   uart_send_string("\n\r> post_shutter_delay: ");
   uart_transmit(p.post_shutter_delay + '0');
+
+  uart_send_string("\n\r> microstep_enabled: ");
+  uart_transmit(p.microstep_enabled + '0');
 
   uart_send_string("\n\r");
 }
