@@ -105,12 +105,12 @@ void _mode_step_shoot_step(uint32_t second) {
   }
 
   // 1. step:
-  for (int i = 0; i < 50; i++) {
-    for (int c = 0; c < p.step_speed; c++) _delay_us(1);
-    PIND |= (1 << PD7); // toggle motor
-    for (int c = 0; c < p.step_speed; c++) _delay_us(1);
+  for (int c = 0; c < p.step_speed; c++){
+    _delay_ms(50);
+    PORTD |= (1 << PD7);
+    _delay_ms(50);
+    PORTD &= ~(1 << PD7);
   }
-  PORTD &= ~(1 << PD7);
 
   // 2. wait for vibrations to settle:
   for (int c = 0; c < p.vibrations_duration;
