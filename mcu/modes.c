@@ -64,6 +64,7 @@ void _mode_continous(uint32_t second) {
 
 void _mode_step_shoot_step(uint32_t second) {
   local_persist uint8_t first_run = 1;
+  local_persist uint16_t count = 0;
 
   char seconds[11];
   uint32_to_str(second, seconds);
@@ -119,6 +120,14 @@ void _mode_step_shoot_step(uint32_t second) {
   PORTC |= (1 << PC1);
   for (int c = 0; c < p.relay_trigger_duration; c++) _delay_ms(1);
   PORTC &= ~(1 << PC1);
+
+  {
+    count++;
+    char count_str[6];
+    uint16_to_str(count, count_str);
+    debug_string("\n\rshutter count: ");
+    debug_string(count_str);
+  }
 
   // 4. wait for camera:
   for (int c = 0; c < p.post_shutter_delay; c++) _delay_ms(1000);
