@@ -75,7 +75,7 @@ uint8_t profile_set_defaults(uint8_t id) {
   p.direction = 0; 
   p.startup_delay = 0; // seconds
   p.step_speed = 1; // mirco seconds
-  p.vibrations_duration = 3; // seconds
+  p.vibrations_duration = 1; // seconds
   p.relay_trigger_duration = 200; // milliseconds
   p.post_shutter_delay = 1; // seconds
   p.microstep_enabled = 0;
